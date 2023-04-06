@@ -1,0 +1,4333 @@
+openapi: 3.0.0
+info:
+  title: Stateset
+  version: 1.0.0
+  description: OpenAPI specification for the Stateset
+servers:
+  - url: http://api.stateset.com/api/v1
+paths:
+  /accounts:
+    get:
+      summary: Retrieve all accounts
+      operationId: getAccounts
+      responses:
+        '200':
+          description: A list of accounts
+          content:s
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+    post:
+      summary: Create a new account
+      operationId: createAccount
+      requestBody:
+        description: Account object that needs to be added to the CRM database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountInput'
+      responses:
+        '201':
+          description: The created account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+  /accounts/{id}:
+    get:
+      summary: Retrieve an account by ID
+      operationId: getAccountById
+      parameters:
+        - in: path
+          name: id
+          description: ID of the account to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: Account not found
+    put:
+      summary: Update an account by ID
+      operationId: updateAccountById
+      parameters:
+        - in: path
+          name: id
+          description: ID of the account to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Account object that needs to be updated in the CRM database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountInput'
+      responses:
+        '200':
+          description: The updated account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: Account not found
+  /agreements:
+    get:
+      summary: Retrieve all agreements
+      operationId: getAgreements
+      responses:
+        '200':
+          description: A list of agreements
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Agreement'
+    post:
+      summary: Create a new agreement
+      operationId: createAgreement
+      requestBody:
+        description: Agreement object that needs to be added to the CRM database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgreementInput'
+      responses:
+        '201':
+          description: The created agreement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agreement'
+  /agreements/{id}:
+    get:
+      summary: Retrieve an agreement by ID
+      operationId: getAgreementById
+      parameters:
+        - in: path
+          name: id
+          description: ID of the agreement to retrieve
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested agreement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agreement'
+        '404':
+          description
+
+components:
+  schemas:
+    Agreement:
+      type: object
+      required:
+        - id
+        - agreementName
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the agreement.
+        agreementName:
+          type: string
+          description: The name of the agreement.
+        agreementNumber:
+          type: string
+          description: The number associated with the agreement.
+        agreementHash:
+          type: string
+          description: The hash of the agreement.
+        agreementStatus:
+          type: string
+          description: The status of the agreement.
+        agreementType:
+          type: string
+          description: The type of the agreement.
+        totalAgreementValue:
+          type: string
+          description: The total value of the agreement.
+        agreementLineItems:
+          type: string
+          description: The line items associated with the agreement.
+        attachments:
+          type: string
+          description: The attachments associated with the agreement.
+        party:
+          type: string
+          description: The party associated with the agreement.
+        counterparty:
+          type: string
+          description: The counterparty associated with the agreement.
+        linearId:
+          type: string
+          description: The linear ID associated with the agreement.
+        opportunity_id:
+          type: string
+          description: The opportunity ID associated with the agreement.
+        user_id:
+          type: string
+          description: The user ID associated with the agreement.
+        price_list_id:
+          type: string
+          description: The price list ID associated with the agreement.
+        order_id:
+          type: string
+          description: The order ID associated with the agreement.
+        account_id:
+          type: string
+          description: The account ID associated with the agreement.
+        startDate:
+          type: string
+          format: date
+          description: The start date of the agreement.
+        endDate:
+          type: string
+          format: date
+          description: The end date of the agreement.
+      example:
+        id: 12345
+        agreementName: Sample Agreement
+        agreementNumber: A0001
+        agreementHash: abcdefg
+        agreementStatus: Active
+        agreementType: Standard
+        totalAgreementValue: $10,000
+        agreementLineItems: Service A, Service B
+        attachments: Agreement.pdf
+        party: Company A
+        counterparty: Company B
+        linearId: 67890
+        opportunity_id: 24680
+        user_id: 13579
+        price_list_id: PL0001
+        order_id: O0001
+        account_id: 56789
+        startDate: 2022-01-01
+        endDate: 2022-12-31
+
+
+        components:
+  schemas:
+    BillOfMaterials:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the bill of materials.
+        number:
+          type: integer
+          nullable: true
+          description: The number of the bill of materials.
+        name:
+          type: string
+          nullable: true
+          description: The name of the bill of materials.
+        valid:
+          type: string
+          nullable: true
+          description: Whether or not the bill of materials is valid.
+        groups:
+          type: string
+          nullable: true
+          description: The groups associated with the bill of materials.
+        created_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the bill of materials was created.
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the bill of materials was last updated.
+        description:
+          type: string
+          nullable: true
+          description: A description of the bill of materials.
+      required:
+        - id
+      example:
+        id: "123e4567-e89b-12d3-a456-426655440000"
+        number: 1
+        name: "Bill of Materials 1"
+        valid: "Yes"
+        groups: "Group 1, Group 2"
+        created_at: "2023-04-01T12:34:56Z"
+        updated_at: "2023-04-01T12:34:56Z"
+        description: "This is a sample bill of materials."
+
+  paths:
+    /bom/{id}:
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the bill of materials to retrieve.
+          required: true
+          schema:
+            type: string
+            format: uuid
+      get:
+        summary: Get a bill of materials by ID.
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/BillOfMaterials'
+          '404':
+            description: Not Found
+      delete:
+        summary: Delete a bill of materials by ID.
+        responses:
+          '204':
+            description: No Content
+          '404':
+            description: Not Found
+
+    /bom:
+      post:
+        summary: Create a new bill of materials.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillOfMaterials'
+              example:
+                number: 2
+                name: "Bill of Materials 2"
+                valid: "No"
+                groups: "Group 1, Group 3"
+                description: "This is another sample bill of materials."
+        responses:
+          '201':
+            description: Created
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/BillOfMaterials'
+          '400':
+            description: Bad Request
+
+      get:
+        summary: Get a list of all bill of materials.
+        responses:
+          '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/BillOfMaterials'
+          '404':
+            description: Not Found
+
+      put:
+        summary: Update an existing bill of materials by ID.
+        requestBody:
+          required: true
+         
+
+components:
+  schemas:
+    BillOfMaterialsLineItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the line item.
+          example: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+        part_number:
+          type: string
+          nullable: true
+          description: The part number of the item.
+          example: "12345"
+        part_name:
+          type: string
+          nullable: true
+          description: The name of the item.
+          example: "Screw"
+        quantity:
+          type: integer
+          nullable: true
+          description: The quantity of the item required in the bill of materials.
+          example: 50
+        purchase_supply_type:
+          type: string
+          nullable: true
+          description: The type of purchase/supply for the item.
+          example: "Vendor"
+        line_type:
+          type: string
+          nullable: true
+          description: The type of line item in the bill of materials.
+          example: "Raw Material"
+        bill_of_materials_number:
+          type: integer
+          nullable: true
+          description: The bill of materials number that this line item belongs to.
+          example: 1
+        status:
+          type: string
+          nullable: true
+          description: The status of the line item.
+          example: "Pending"
+
+      required:
+        - id
+
+/calls:
+  get:
+    summary: Retrieve a list of calls
+    responses:
+      '200':
+        description: A list of calls
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Call'
+  post:
+    summary: Create a new call
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CallInput'
+    responses:
+      '201':
+        description: The created call
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Call'
+/components/schemas/Call:
+  type: object
+  properties:
+    id:
+      type: integer
+    callNotes:
+      type: string
+    account_id:
+      type: string
+    callStart:
+      type: string
+      format: time
+    callEnd:
+      type: string
+      format: time
+    callType:
+      type: string
+    callName:
+      type: string
+    contact_id:
+      type: string
+    vendor_id:
+      type: string
+    supplier_id:
+      type: string
+  required:
+    - id
+    - account_id
+    - callStart
+  additionalProperties: false
+/components/schemas/CallInput:
+  type: object
+  properties:
+    callNotes:
+      type: string
+    account_id:
+      type: string
+    callStart:
+      type: string
+      format: time
+    callEnd:
+      type: string
+      format: time
+    callType:
+      type: string
+    callName:
+      type: string
+    contact_id:
+      type: string
+    vendor_id:
+      type: string
+    supplier_id:
+      type: string
+  required:
+    - account_id
+    - callStart
+  additionalProperties: false
+
+paths:
+  /campaigns:
+    get:
+      summary: Retrieve all campaigns
+      description: Returns a list of all campaigns.
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Campaign'
+    post:
+      summary: Create a new campaign
+      description: Creates a new campaign.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Campaign'
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        400:
+          description: Bad Request
+        500:
+          description: Internal Server Error
+
+  /campaigns/{id}:
+    get:
+      summary: Retrieve a campaign by ID
+      description: Returns a campaign by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the campaign to retrieve.
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        404:
+          description: Not Found
+    put:
+      summary: Update a campaign by ID
+      description: Updates a campaign by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the campaign to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Campaign'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        400:
+          description: Bad Request
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
+    delete:
+      summary: Delete a campaign by ID
+      description: Deletes a campaign by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the campaign to delete.
+          schema:
+            type: string
+      responses:
+        204:
+          description: No Content
+        404:
+          description: Not Found
+        500:
+          description: Internal Server Error
+
+Campaign:
+  type: object
+  properties:
+    actualCost:
+      type: number
+      format: float
+      nullable: true
+      description: The actual cost of the campaign.
+    budgetedCost:
+      type: number
+      format: float
+      nullable: true
+      description: The budgeted cost of the campaign.
+    description:
+      type: string
+      nullable: true
+      description: The description of the campaign.
+    expectedResponse:
+      type: string
+      nullable: true
+      description: The expected response of the campaign.
+    expectedRevenue:
+      type: number
+      format: float
+      nullable: true
+      description: The expected revenue of the campaign.
+    name:
+      type: string
+      nullable: false
+      description: The name of the campaign.
+    numberOfContacts:
+      type: number
+      format: float
+      nullable: true
+      description: The number of contacts associated with the campaign.
+    numberOfConvertedLeads:
+      type: number
+      format: float
+      nullable: true
+      description: The number of converted leads associated with the campaign.
+    numberOfLeads:
+      type: number
+      format: float
+      nullable: true
+      description: The number of leads associated with the campaign.
+    startDate:
+      type: string
+      nullable: true
+      description: The start date of the campaign.
+    status:
+      type: string
+      nullable: true
+      description: The status of the campaign.
+    type:
+      type: string
+      nullable: true
+      description: The type of the campaign.
+    id:
+      type: string
+      nullable: true
+      description: The ID of the campaign.
+  required:
+    - name
+
+paths:
+  /cases:
+    get:
+      summary: Get all cases
+      description: Returns a list of all cases.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Case'
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+    post:
+      summary: Create a new case
+      description: Creates a new case.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Case'
+            example:
+              id: "123"
+              caseName: "Defective Product"
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        default:
+          description: Error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+  /cases/{caseId}:
+    get:
+      summary: Get a case by ID
+      description: Returns the case with the specified ID.
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          description: ID of the case to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '404':
+          description: Case not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+                          type: string
+    patch:
+      summary: Update a case by ID
+      description: Updates the case with the specified ID.
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          description: ID of the case to update.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Case'
+            example:
+              caseName: "Defective Product (Updated)"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '404':
+          description: Case not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        message:
+    components:
+  schemas:
+    Case:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the case.
+        caseName:
+          type: string
+          description: Name of the case.
+        description:
+          type: string
+          nullable: true
+          description: Description of the case.
+        caseNumber:
+          type: string
+          nullable: true
+          description: Number of the case.
+        caseStatus:
+          type: string
+          nullable: true
+          description: Status of the case.
+        priority:
+          type: string
+          nullable: true
+          description: Priority of the case.
+        submitter:
+          type: string
+          nullable: true
+          description: Name of the person who submitted the case.
+        resolver:
+          type: string
+          nullable: true
+          description: Name of the person assigned to resolve the case.
+        account_id:
+          type: string
+          nullable: true
+          description: ID of the account associated with the case.
+        user_id:
+          type: string
+          nullable: true
+          description: ID of the user associated with the case.
+        contact_id:
+          type: string
+          nullable: true
+          description: ID of the contact associated with the case.
+        isClosed:
+          type: boolean
+          nullable: true
+          description: Flag indicating whether the case is closed.
+        isDeleted:
+          type: boolean
+          nullable: true
+          description: Flag indicating whether the case is deleted.
+        isEscalated:
+          type: string
+          nullable: true
+          description: Flag indicating whether the case is escalated.
+        createdDate:
+          type: string
+          nullable: true
+          format: date-time
+          description: Date and time when the case was created.
+        vendor_id:
+          type: string
+          nullable: true
+          description: ID of the vendor associated with the case.
+        supplier_id:
+          type: string
+          nullable: true
+          description: ID of the supplier associated with the case.
+      required:
+        - id
+        - caseName
+      example:
+        id: "123"
+        caseName: "Defective Product"
+
+
+components:
+  schemas:
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the contact.
+        firstName:
+          type: string
+          description: The first name of the contact.
+        lastName:
+          type: string
+          description: The last name of the contact.
+        phone:
+          type: string
+          description: The phone number of the contact.
+        email:
+          type: string
+          format: email
+          description: The email address of the contact.
+        controller:
+          type: string
+          description: The controller of the contact.
+        processor:
+          type: string
+          description: The processor of the contact.
+        account_id:
+          type: string
+          format: uuid
+          description: The unique identifier for the account associated with the contact.
+        user_id:
+          type: string
+          format: uuid
+          description: The unique identifier for the user associated with the contact.
+        title:
+          type: string
+          description: The title of the contact.
+        description:
+          type: string
+          description: The description of the contact.
+        birthdate:
+          type: string
+          description: The birthdate of the contact.
+        department:
+          type: string
+          description: The department of the contact.
+        leadSource:
+          type: string
+          description: The lead source of the contact.
+        mailingCity:
+          type: string
+          description: The city of the mailing address of the contact.
+        mailingCountry:
+          type: string
+          description: The country of the mailing address of the contact.
+        mailingGeocodeAccuracy:
+          type: string
+          description: The geocode accuracy of the mailing address of the contact.
+        mailingState:
+          type: string
+          description: The state of the mailing address of the contact.
+        mailingStreet:
+          type: string
+          description: The street address of the mailing address of the contact.
+        photoUrl:
+          type: string
+          description: The URL of the photo of the contact.
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time when the contact was created.
+        nextMeeting:
+          type: string
+          format: date
+          description: The date of the next meeting with the contact.
+        avatar:
+          type: string
+          description: The avatar of the contact.
+        handle:
+          type: string
+          description: The handle of the contact.
+        assistant:
+          type: string
+          description: The assistant of the contact.
+        assistant_phone:
+          type: string
+          description: The phone number of the assistant of the contact.
+        owner:
+          type: string
+          description: The owner of the contact.
+        created_by:
+          type: string
+          description: The user who created the contact.
+        do_not_call:
+          type: boolean
+          description: Whether the contact should not be called.
+        email_opt_out:
+          type: boolean
+          description: Whether the contact has opted out of receiving emails.
+        fax:
+          type: string
+          description: The fax number of the contact.
+        fax_opt_out:
+          type: boolean
+          description: Whether the contact has opted out of receiving faxes.
+        languages:
+          type: string
+          description: The languages spoken by the contact.
+        invalid_contact:
+          type: boolean
+          description: Whether the contact is invalid.
+        last_modified_by:
+          type: string
+          description: The user who last modified the contact.
+        vendor_id:
+          type: string
+          format: uuid
+          description
+
+          /contacts:
+  get:
+    summary: Retrieves a list of contacts
+    description: |
+      This endpoint retrieves a list of all contacts.
+    responses:
+      '200':
+        description: A list of contacts
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Contact'
+      '500':
+        description: Internal server error
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+              /contacts/{id}:
+  get:
+    summary: Retrieves a contact by ID
+    description: |
+      This endpoint retrieves a specific contact by their unique identifier.
+    parameters:
+      - name: id
+        in: path
+        description: The unique identifier of the contact to retrieve
+        required: true
+        schema:
+          type: string
+    responses:
+      '200':
+        description: The requested contact
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      '404':
+        description: Contact not found
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+
+/contacts:
+  post:
+    summary: Creates a new contact
+    description: |
+      This endpoint creates a new contact with the provided information.
+    requestBody:
+      description: The information for the new contact
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContactInput'
+    responses:
+      '201':
+        description: The newly created contact
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      '400':
+        description: Invalid request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+
+/contacts/{id}:
+  put:
+    summary: Updates an existing contact by ID
+    description: |
+      This endpoint updates an existing contact with the provided information.
+    parameters:
+      - name: id
+        in: path
+        description: The unique identifier of the contact to update
+        required: true
+        schema:
+          type: string
+    requestBody:
+      description: The updated information for the contact
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ContactInput'
+    responses:
+      '200':
+        description: The updated contact
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      '400':
+        description: Invalid request body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+      '404':
+        description: Contact not found
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+
+/contacts/{id}:
+  delete:
+    summary: Deletes a contact by ID
+    description: |
+      This endpoint deletes an existing contact by their unique identifier.
+    parameters:
+      - name: id
+        in: path
+        description: The unique identifier of the contact to delete
+        required: true
+        schema:
+          type: string
+    responses:
+      '204':
+        description: Contact successfully deleted
+      '404':
+        description: Contact not found
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Error'
+
+
+
+paths:
+  /cycle-counts:
+    get:
+      summary: Get all cycle counts
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a new cycle count
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                number:
+                  type: integer
+                site:
+                  type: string
+                type:
+                  type: string
+                method:
+                  type: string
+                status:
+                  type: string
+                scheduled_start_date:
+                  type: string
+                  format: date
+                scheduled_end_date:
+                  type: string
+                  format: date
+                completed_date:
+                  type: string
+                  format: date
+                assigned_user:
+                  type: string
+              required:
+                - number
+                - site
+                - type
+                - method
+                - status
+                - scheduled_start_date
+                - scheduled_end_date
+                - assigned_user
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+    delete:
+      summary: Delete all cycle counts
+      responses:
+        '204':
+          description: No content
+
+  /cycle-counts/{id}:
+    get:
+      summary: Get a cycle count by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The ID of the cycle count to retrieve
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Cycle count not found
+    put:
+      summary: Update a cycle count by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The ID of the cycle count to update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                number:
+                  type: integer
+                site:
+                  type: string
+                type:
+                  type: string
+                method:
+                  type: string
+                status:
+                  type: string
+                scheduled_start_date:
+                  type: string
+                  format: date
+                scheduled_end_date:
+                  type: string
+                  format: date
+                completed_date:
+                  type: string
+                  format: date
+                assigned_user:
+                  type: string
+              required:
+                - number
+                - site
+                - type
+                - method
+                - status
+                - scheduled_start_date
+                - scheduled_end_date
+                - assigned_user
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad request
+        '404':
+          description: Cycle count not found
+    delete:
+      summary: Delete a cycle count by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The ID of the cycle count to delete
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: Cycle count not found
+
+Cycle Count Line Items:
+  properties:
+    id:
+      type: string
+      format: uuid
+      nullable: false
+      description: The unique identifier of the cycle count line item.
+    cycle_count_number:
+      type: integer
+      nullable: true
+      description: The number of the cycle count associated with this line item.
+    status:
+      type: string
+      nullable: true
+      description: The status of the cycle count line item.
+    part:
+      type: string
+      nullable: true
+      description: The part associated with the cycle count line item.
+    standard_tracking:
+      type: string
+      nullable: true
+      description: The standard tracking information associated with the cycle count line item.
+    serialized_tracking:
+      type: string
+      nullable: true
+      description: The serialized tracking information associated with the cycle count line item.
+    quantity_expected:
+      type: integer
+      nullable: true
+      description: The expected quantity of the part associated with the cycle count line item.
+    quantity_counted:
+      type: integer
+      nullable: true
+      description: The actual quantity of the part counted during the cycle count.
+    variance_quantity:
+      type: integer
+      nullable: true
+      description: The difference between the expected and actual quantity of the part.
+    variance_cost:
+      type: integer
+      nullable: true
+      description: The difference in cost between the expected and actual quantity of the part.
+    explanation:
+      type: string
+      nullable: true
+      description: An explanation for any variances in the cycle count line item.
+  required:
+    - id
+  example:
+    id: 01234567-89ab-cdef-0123-456789abcdef
+    cycle_count_number: 12345
+    status: "Complete"
+    part: "ABC123"
+    standard_tracking: "Lot #1234"
+    serialized_tracking: "Serial #56789"
+    quantity_expected: 100
+    quantity_counted: 98
+    variance_quantity: -2
+    variance_cost: -50
+    explanation: "Shortage due to damaged goods."
+
+
+  paths:
+    /inventory:
+      get:
+        summary: Retrieve all inventory items
+        description: Returns a list of all inventory items.
+        responses:
+          '200':
+            description: A list of inventory items.
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InventoryItem'
+
+      post:
+        summary: Create a new inventory item
+        description: Creates a new inventory item.
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+        responses:
+          '201':
+            description: The newly created inventory item.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/InventoryItem'
+              
+    /inventory/{id}:
+      get:
+        summary: Retrieve an inventory item by ID
+        description: Returns an inventory item with the specified ID.
+        parameters:
+          - in: path
+            name: id
+            description: The ID of the inventory item to retrieve.
+            required: true
+            schema:
+              type: string
+        responses:
+          '200':
+            description: The inventory item with the specified ID.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/InventoryItem'
+
+      put:
+        summary: Update an inventory item by ID
+        description: Updates an inventory item with the specified ID.
+        parameters:
+          - in: path
+            name: id
+            description: The ID of the inventory item to update.
+            required: true
+            schema:
+              type: string
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryItem'
+        responses:
+          '200':
+            description: The updated inventory item.
+            content:
+              application/json:
+                schema:
+                  $ref: '#
+    components:
+  schemas:
+    InventoryItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the inventory item.
+        sku:
+          type: string
+          description: The stock keeping unit of the inventory item.
+        description:
+          type: string
+          description: The description of the inventory item.
+        size:
+          type: string
+          description: The size of the inventory item.
+        incoming:
+          type: integer
+          description: The quantity of incoming inventory item.
+        color:
+          type: string
+          description: The color of the inventory item.
+        warehouse:
+          type: integer
+          description: The identifier of the warehouse where the inventory item is stored.
+        arriving:
+          type: string
+          format: date
+          description: The date when the inventory item is expected to arrive.
+        purchase_order_id:
+          type: string
+          description: The identifier of the purchase order for the inventory item.
+        available:
+          type: integer
+          description: The quantity of available inventory item.
+        deliveryDate:
+          type: string
+          format: date
+          description: The date when the inventory item is delivered.
+        arrivalDate:
+          type: string
+          format: date
+          description: The date when the inventory item arrived.
+        upc:
+          type: string
+          description: The universal product code of the inventory item.
+        restock_date:
+          type: string
+          format: date
+          nullable: true
+          description: The date when the inventory item is scheduled to be restocked.
+      required:
+        - id
+        - sku
+        - description
+
+
+        components:
+  schemas:
+    Invoice:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the invoice.
+          primary_key: true
+          unique: true
+        accountName:
+          type: string
+          nullable: true
+          description: The name of the account associated with the invoice.
+        order_id:
+          type: string
+          nullable: true
+          description: The ID of the order associated with the invoice.
+        account_id:
+          type: string
+          nullable: true
+          description: The ID of the account associated with the invoice.
+        accountCountry:
+          type: string
+          nullable: true
+          description: The country of the account associated with the invoice.
+        amountDue:
+          type: number
+          format: float
+          nullable: true
+          description: The total amount due on the invoice.
+        amountPaid:
+          type: number
+          format: float
+          nullable: true
+          description: The amount paid towards the invoice.
+        amountRemaining:
+          type: number
+          format: float
+          nullable: true
+          description: The remaining amount due on the invoice.
+        billingReason:
+          type: string
+          nullable: true
+          description: The reason for the billing of the invoice.
+        collectionMethod:
+          type: string
+          nullable: true
+          description: The collection method for the invoice.
+        created:
+          type: string
+          format: date-time
+          nullable: true
+          default: now()
+          description: The timestamp for when the invoice was created.
+        currency:
+          type: string
+          nullable: true
+          description: The currency used on the invoice.
+        customerName:
+          type: string
+          nullable: true
+          description: The name of the customer associated with the invoice.
+        customerEmail:
+          type: string
+          nullable: true
+          format: email
+          description: The email address of the customer associated with the invoice.
+        customerPhone:
+          type: string
+          nullable: true
+          description: The phone number of the customer associated with the invoice.
+        dueDate:
+          type: string
+          format: date
+          nullable: true
+          description: The due date for the invoice.
+        endingBalance:
+          type: number
+          format: float
+          nullable: true
+          description: The ending balance for the invoice.
+        invoicePDF:
+          type: string
+          nullable: true
+          description: The URL for the invoice PDF.
+        number:
+          type: integer
+          nullable: true
+          description: The number of the invoice.
+        paid:
+          type: boolean
+          nullable: true
+          description: Whether or not the invoice has been paid.
+        periodEnd:
+          type: string
+          format: date
+          nullable: true
+          description: The end date for the invoice period.
+        periodStart:
+          type: string
+          format: date
+          nullable: true
+          description: The start date for the invoice period.
+        status:
+          type: string
+          nullable: true
+          description: The status of the invoice.
+        subtotal:
+          type: number
+          format: float
+          nullable: true
+          description: The subtotal amount on the invoice.
+        invoiceName:
+          type: string
+          nullable: true
+          description: The name of the invoice.
+        total:
+          type: integer
+
+          paths:
+    /invoices:
+      get:
+        summary: Get all invoices
+        description: Returns a list of all invoices.
+        responses:
+          200:
+            description: OK
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '/components/schemas/Invoice'
+
+      post:
+        summary: Create a new invoice
+        description: Creates a new invoice.
+        requestBody:
+          description: The invoice to create.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        responses:
+          201:
+            description: Created
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Invoice'
+    /invoices/{id}:
+      get:
+        summary: Get an invoice by ID
+        description: Returns the invoice with the specified ID.
+        parameters:
+          - name: id
+            in: path
+            description: The ID of the invoice to retrieve.
+            required: true
+            schema:
+              type: string
+              format: uuid
+        responses:
+          200:
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Invoice'
+          404:
+            description: Not found
+      put:
+        summary: Update an invoice by ID
+        description: Updates the invoice with the specified ID.
+        parameters:
+          - name: id
+            in: path
+            description: The ID of the invoice to update.
+            required: true
+            schema:
+              type: string
+              format: uuid
+        requestBody:
+          description: The updated invoice.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        responses:
+          200:
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Invoice'
+          404:
+            description: Not found
+      delete:
+        summary: Delete an invoice by ID
+        description: Deletes the invoice with the specified ID.
+        parameters:
+          - name: id
+            in: path
+            description: The ID of the invoice to delete.
+            required: true
+            schema:
+              type: string
+              format: uuid
+        responses:
+          204:
+            description: No content
+          404:
+            description: Not found
+
+paths:
+  /leads:
+    get:
+      summary: Get all leads
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a new lead
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  nullable: true
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                  nullable: true
+                email:
+                  type: string
+                  nullable: true
+                  format: email
+                phone:
+                  type: string
+                  nullable: true
+                controller:
+                  type: string
+                  nullable: true
+                processor:
+                  type: string
+                  nullable: true
+                status:
+                  type: string
+                  nullable: true
+                user_id:
+                  type: string
+                  nullable: true
+                description:
+                  type: string
+                  nullable: true
+                title:
+                  type: string
+                  nullable: true
+                createdAt:
+                  type: string
+                  format: date-time
+                  nullable: true
+                company:
+                  type: string
+                  nullable: true
+                account_id:
+                  type: string
+                  nullable: true
+                address:
+                  type: string
+                  nullable: true
+                created_by:
+                  type: string
+                  nullable: true
+                email_opt_out:
+                  type: boolean
+                  nullable: true
+                fax:
+                  type: string
+                  nullable: true
+                fax_opt_out:
+                  type: boolean
+                  nullable: true
+                industry:
+                  type: string
+                  nullable: true
+                last_modified_by:
+                  type: string
+                  nullable: true
+                lead_source:
+                  type: string
+                  nullable: true
+                mobile:
+                  type: string
+                  nullable: true
+                product_interest:
+                  type: string
+                  nullable: true
+                rating:
+                  type: integer
+                  nullable: true
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad request
+  /leads/{id}:
+    get:
+      summary: Get a lead by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Lead not found
+    put:
+      summary: Update a lead by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                  nullable: true
+                email:
+                  type: string
+                  nullable: true
+                  format: email
+                phone:
+                  type: string
+                  nullable: true
+                controller:
+                  type: string
+                  nullable: true
+                processor:
+                  type: string
+                  nullable: true
+                status:
+                  type: string
+                  nullable: true
+                user_id:
+                  type: string
+                  nullable: true
+                description:
+                  type: string
+                  nullable: true
+                title:
+                  type: string
+                  nullable: true
+                createdAt:
+                  type: string
+                  format: date-time
+                  nullable: true
+                company:
+                  type: string
+                  nullable: true
+                account_id:
+                  type: string
+                  nullable:
+
+manufacture-orders:
+  get:
+    description: Returns a list of all manufacture orders.
+    responses:
+      200:
+        description: OK
+  post:
+    description: Creates a new manufacture order.
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              number:
+                type: integer
+              site:
+                type: string
+              yield_location:
+                type: string
+              priority:
+                type: string
+              expected_completion_date:
+                type: string
+                format: date
+              created_on:
+                type: string
+                format: date
+              issued_on:
+                type: string
+                format: date
+              memo:
+                type: string
+              required:
+                - id
+                - number
+                - site
+                - yield_location
+                - priority
+                - expected_completion_date
+                - created_on
+                - issued_on
+                - memo
+    responses:
+      201:
+        description: Created
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    number:
+                      type: integer
+                    site:
+                      type: string
+                    yield_location:
+                      type: string
+                    priority:
+                      type: string
+                    expected_completion_date:
+                      type: string
+                      format: date
+                    created_on:
+                      type: string
+                      format: date
+                    issued_on:
+                      type: string
+                      format: date
+                    memo:
+                      type: string
+
+/manufacture-orders/{id}:
+  get:
+    description: Returns a single manufacture order by ID.
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      200:
+        description: OK
+      404:
+        description: Not Found
+  put:
+    description: Updates a manufacture order by ID.
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              number:
+                type: integer
+              site:
+                type: string
+              yield_location:
+                type: string
+              priority:
+                type: string
+              expected_completion_date:
+                type: string
+                format: date
+              created_on:
+                type: string
+                format: date
+              issued_on:
+                type: string
+                format: date
+              memo:
+                type: string
+    responses:
+      200:
+        description: OK
+      404:
+        description: Not Found
+  delete:
+    description: Deletes a manufacture order by ID.
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+    responses:
+      204:
+        description: No Content
+      404:
+        description: Not Found
+
+/components/schemas/ManufactureOrderLineItems:
+  type: object
+  properties:
+    id:
+      type: string
+      format: uuid
+      description: Unique identifier for the Manufacture Order Line Item.
+    line_type:
+      type: string
+      nullable: true
+      description: The type of the manufacture order line item.
+    output_type:
+      type: string
+      nullable: true
+      description: The type of output of the manufacture order line item.
+    line_status:
+      type: string
+      nullable: true
+      description: The status of the manufacture order line item.
+    part_number:
+      type: string
+      nullable: true
+      description: The part number of the manufacture order line item.
+    part_name:
+      type: string
+      nullable: true
+      description: The name of the part of the manufacture order line item.
+    expected_date:
+      type: string
+      format: date
+      nullable: true
+      description: The expected completion date of the manufacture order line item.
+    quantity:
+      type: integer
+      nullable: true
+      description: The quantity of the manufacture order line item.
+    work_order_number:
+      type: integer
+      nullable: true
+      description: The work order number of the manufacture order line item.
+    site:
+      type: string
+      nullable: true
+      description: The site where the manufacture order line item is to be produced.
+    yield_location:
+      type: string
+      nullable: true
+      description: The location where the yield of the manufacture order line item is to be produced.
+    bom_number:
+      type: integer
+      nullable: true
+      description: The Bill of Materials (BOM) number of the manufacture order line item.
+    bom_name:
+      type: string
+      nullable: true
+      description: The Bill of Materials (BOM) name of the manufacture order line item.
+    priority:
+      type: string
+      nullable: true
+      description: The priority of the manufacture order line item.
+    manufacture_order_number:
+      type: integer
+      nullable: true
+      description: The number of the manufacture order for which the manufacture order line item belongs to.
+  required:
+    - id
+
+/messages:
+  get:
+    summary: Get all messages
+    responses:
+      '200':
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Message'
+  post:
+    summary: Create a new message
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MessageInput'
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+  /{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: ID of the message to retrieve
+        schema:
+          type: string
+    get:
+      summary: Get a message by ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+    put:
+      summary: Update a message by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageInput'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+    delete:
+      summary: Delete a message by ID
+      responses:
+        '204':
+          description: No Content
+
+components:
+  schemas:
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the message
+        body:
+          type: string
+          nullable: true
+          description: The body of the message
+        to:
+          type: string
+          nullable: true
+          description: The recipient of the message
+        from:
+          type: string
+          nullable: true
+          description: The sender of the message
+        sentReceipt:
+          type: boolean
+          nullable: true
+          description: Indicates whether the message has been sent
+        deliveredReceipt:
+          type: boolean
+          nullable: true
+          description: Indicates whether the message has been delivered
+        fromMe:
+          type: boolean
+          nullable: true
+          description: Indicates whether the message is from the user
+        user_id:
+          type: string
+          nullable: true
+          description: The ID of the user associated with the message
+        username:
+          type: string
+          nullable: true
+          description: The username of the user associated with the message
+        is_public:
+          type: boolean
+          nullable: true
+          description: Indicates whether the message is public
+        created_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: The creation time of the message
+        date:
+          type: string
+          format: date
+          nullable: true
+          description: The date of the message
+        time:
+          type: string
+          format: time
+          nullable: true
+          description: The time of the message
+        timestamp:
+          type: string
+          nullable: true
+          description: The timestamp of the message
+        messageNumber:
+          type: integer
+          nullable: true
+          description: The message number
+        isCode:
+          type: boolean
+          nullable: true
+          description: Indicates whether the message is a code
+        likes:
+          type: integer
+          nullable: true
+          description: The number of likes for the message
+        return
+
+paths:
+  /opportunities:
+    get:
+      summary: Retrieve a list of opportunities
+      responses:
+        '200':
+          description: A list of opportunities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Opportunity'
+    post:
+      summary: Create a new opportunity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Opportunity'
+      responses:
+        '201':
+          description: The newly created opportunity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Opportunity'
+  /opportunities/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The ID of the opportunity to retrieve or update
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Retrieve a single opportunity by ID
+      responses:
+        '200':
+          description: The requested opportunity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Opportunity'
+        '404':
+          description: The specified opportunity ID was not found
+    patch:
+      summary: Update an opportunity by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Opportunity'
+      responses:
+        '200':
+          description: The updated opportunity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Opportunity'
+        '404':
+          description: The specified opportunity ID was not found
+        components:
+  schemas:
+    Opportunity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the Opportunity.
+          primaryKey: true
+          unique: true
+        opportunityName:
+          type: string
+        account_id:
+          type: string
+          nullable: true
+        opportunityStage:
+          type: string
+          nullable: true
+        opportunityAmount:
+          type: string
+          nullable: true
+        owner:
+          type: string
+          nullable: true
+        user_id:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        closeDate:
+          type: string
+          format: date
+          nullable: true
+        amount:
+          type: string
+          format: money
+          nullable: true
+        fiscalQuarter:
+          type: string
+          nullable: true
+        fiscalYear:
+          type: string
+          nullable: true
+        isClosed:
+          type: boolean
+          nullable: true
+        isPrivate:
+          type: boolean
+          nullable: true
+        isWon:
+          type: boolean
+          nullable: true
+        probability:
+          type: number
+          nullable: true
+        type:
+          type: string
+          nullable: true
+        campaign_id:
+          type: string                        
+          nullable: true
+        pricelist_id:
+          type: string
+          nullable: true
+        nextMeeting:
+          type: string
+          format: date
+          nullable: true
+        vendor_id:
+          type: string
+          nullable: true
+        supplier_id:
+          type: string
+          nullable: true
+
+paths:
+  /picks:
+    post:
+      summary: Create a new pick
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pick'
+      responses:
+        '201':
+          description: The pick was created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pick'
+        '400':
+          description: Invalid input
+    get:
+      summary: Get a list of all picks
+      responses:
+        '200':
+          description: A list of picks was returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pick'
+        '404':
+          description: Picks not found
+
+  /picks/{id}:
+    get:
+      summary: Get a pick by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the pick to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The pick was returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pick'
+        '404':
+          description: Pick not found
+
+    patch:
+      summary: Update a pick by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the pick to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pick'
+      responses:
+        '200':
+          description: The pick was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pick'
+        '404':
+          description: Pick not found
+
+    delete:
+      summary: Delete a pick by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the pick to delete
+          schema:
+            type: string
+      responses:
+        '204':
+          description: The pick was deleted successfully
+        '404':
+          description: Pick not found
+
+components:
+  schemas:
+    Pick:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the pick.
+          example: d0f0159c-ae4c-4e51-93f4-59ca8e4f5b5a
+        number:
+          type: integer
+          nullable: true
+          description: The pick number.
+          example: 123
+        work_order_number:
+          type: integer
+          nullable: true
+          description: The work order number associated with the pick.
+          example: 456
+        bill_of_materials_number:
+          type: integer
+          nullable: true
+          description: The bill of materials number associated with the pick.
+          example: 789
+        location:
+          type: string
+          nullable: true
+          description: The location where the pick will take place.
+          example: Warehouse A
+        pick_method:
+          type: string
+          nullable: true
+          description: The method used for the pick.
+          example: Pick to cart
+        date_created:
+          type: string
+          format: date
+          nullable: true
+          description: The date the pick was created.
+          example: '2023-04-01'
+        site:
+          type: string
+          nullable: true
+          description: The site where the pick will take place.
+          example: Site A
+        status:
+          type: string
+          nullable: true
+          description: The current status of the pick.
+          example: Open
+      required:
+        - id
+paths:
+  /pick-line-items:
+    post:
+      summary: Create a new pick line item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PickLineItem'
+      responses:
+        '201':
+          description: The pick line item was created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PickLineItem'
+        '400':
+          description: Invalid input
+    get:
+      summary: Get a list of all pick line items
+      responses:
+        '200':
+          description: A list of pick line items was returned successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PickLineItem'
+        '404':
+          description: Pick line items not found
+
+  /pick-line-items/{id}:
+    get:
+      summary: Get a pick line item by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the pick line item to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The pick line item was returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PickLineItem'
+        '404':
+          description: Pick line item not found
+
+    patch:
+      summary: Update a pick line item by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the pick line item to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PickLineItem'
+      responses:
+        '200':
+          description: The pick line item was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PickLineItem'
+        '404':
+          description: Pick line item not found
+
+    delete:
+      summary: Delete a pick line item by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: The ID of the pick line item to delete
+          schema:
+            type: string
+      responses:
+        '204':
+          description: The pick line item was deleted successfully
+        '404':
+          description: Pick line item not found
+
+components:
+  schemas:
+    PickLineItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the pick line item.
+        pick_number:
+          type: integer
+          nullable: true
+          description: The pick number associated with the line item.
+        status:
+          type: string
+          nullable: true
+          description: The status of the pick line item.
+        part_number:
+          type: string
+          nullable: true
+          description: The part number of the item to be picked.
+        part_name:
+          type: string
+          nullable: true
+          description: The name of the item to be picked.
+        quantity_to_pick:
+          type: integer
+          nullable: true
+          description: The quantity of the item to be picked.
+        quantity_picked:
+          type: integer
+          nullable: true
+          description: The quantity of the item that has been picked.
+        work_order_number:
+          type: integer
+          nullable: true
+          description: The work order number associated with the item to be picked.
+        pick_plan:
+          type: string
+          nullable: true
+          description: The pick plan associated with the pick line item.
+        commit_quantity:
+          type: integer
+          nullable: true
+          description: The quantity of the item that has been committed for picking.
+        commit_location:
+          type: integer
+          nullable: true
+          description: The location to which the item has been committed for picking.
+      required:
+        - id
+
+paths:
+  /reconciles:
+    get:
+      summary: Returns a list of all reconciles
+      responses:
+        200:
+          description: A list of all reconciles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reconcile'
+    post:
+      summary: Creates a new reconcile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reconcile'
+      responses:
+        201:
+          description: The newly created reconcile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reconcile'
+  /reconciles/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The ID of the reconcile to retrieve/update/delete
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Returns a specific reconcile
+      responses:
+        200:
+          description: The requested reconcile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reconcile'
+        404:
+          description: The reconcile was not found
+    patch:
+      summary: Updates a specific reconcile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reconcile'
+      responses:
+        200:
+          description: The updated reconcile
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reconcile'
+        404:
+          description: The reconcile was not found
+    delete:
+      summary: Deletes a specific reconcile
+      responses:
+        204:
+          description: The reconcile was successfully deleted
+        404:
+          description: The reconcile was not found
+
+components:
+  schemas:
+    Reconcile:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The ID of the reconcile.
+        number:
+          type: integer
+          nullable: true
+          description: The number of the reconcile.
+        site:
+          type: string
+          nullable: true
+          description: The site of the reconcile.
+        order_number:
+          type: string
+          nullable: true
+          description: The order number of the reconcile.
+        bill_number:
+          type: string
+          nullable: true
+          description: The bill number of the reconcile.
+        vendor:
+          type: string
+          nullable: true
+          description: The vendor of the reconcile.
+        vendor_so_number:
+          type: string
+          nullable: true
+          description: The vendor SO number of the reconcile.
+        terms:
+          type: string
+          nullable: true
+          description: The terms of the reconcile.
+        priority:
+          type: string
+          nullable: true
+          description: The priority of the reconcile.
+        assigned_user:
+          type: string
+          nullable: true
+          description: The assigned user of the reconcile.
+        type:
+          type: string
+          nullable: true
+          description: The type of the reconcile.
+        created_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the reconcile was created.
+        updated_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the reconcile was last updated.
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+          description: The date and time the reconcile was completed.
+        bill_date:
+          type: string
+          format: date
+          nullable: true
+          description: The bill date of the reconcile.
+        bill_due_date:
+          type: string
+          format: date
+          nullable: true
+          description: The due date of the reconcile.
+        billed_total_cost:
+          type: integer
+          nullable: true
+          description: The total cost of the reconcile.
+        landed_total_cost:
+          type: integer
+          nullable: true
+          description: The landed cost of the reconcile.
+        po_total_cost:
+          type: integer
+          nullable: true
+          description: The PO total cost of the reconcile.
+        bill_balance:
+          type: integer
+          nullable: true
+          description: The balance of the reconcile.
+        memo:
+          type: string
+          nullable: true
+          description: The memo of the reconcile.
+        categories:
+          type: string
+          nullable: true
+          description: The categories of the reconcile.
+
+  paths:
+    /reconcile-line-items:
+      get:
+        summary: Get all reconcile line items
+        description: Returns all reconcile line items.
+        responses:
+          '200':
+            description: A list of reconcile line items.
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ReconcileLineItem'
+      post:
+        summary: Create a new reconcile line item
+        description: Creates a new reconcile line item.
+        requestBody:
+          description: The reconcile line item to create.
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReconcileLineItem'
+        responses:
+          '201':
+            description: The newly created reconcile line item.
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ReconcileLineItem'
+      /{id}:
+        parameters:
+          - in: path
+            name: id
+            description: The ID of the reconcile line item.
+            required: true
+            schema:
+              type: string
+              format: uuid
+        get:
+          summary: Get a reconcile line item by ID
+          description: Returns a reconcile line item by ID.
+          responses:
+            '200':
+              description: The requested reconcile line item.
+              content
+components:
+  schemas:
+    ReconcileLineItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the reconcile line item.
+        line_type:
+          type: string
+          nullable: true
+          description: The type of line item.
+        status:
+          type: string
+          nullable: true
+          description: The status of the line item.
+        part_number:
+          type: string
+          nullable: true
+          description: The part number for the line item.
+        part_name:
+          type: string
+          nullable: true
+          description: The part name for the line item.
+        vendor_part_number:
+          type: string
+          nullable: true
+          description: The vendor part number for the line item.
+        vendor_part_name:
+          type: string
+          nullable: true
+          description: The vendor part name for the line item.
+        order:
+          type: string
+          nullable: true
+          description: The order for the line item.
+        quantity_billed:
+          type: integer
+          nullable: true
+          description: The quantity billed for the line item.
+        billed_unit_cost:
+          type: integer
+          nullable: true
+          description: The billed unit cost for the line item.
+        billed_total_cost:
+          type: integer
+          nullable: true
+          description: The billed total cost for the line item.
+        vendor:
+          type: string
+          nullable: true
+          description: The vendor for the line item.
+        reconcile_number:
+          type: integer
+          description: The unique identifier for the reconcile.
+      required:
+        - id
+        - reconcile_number
+      example:
+        id: 123e4567-e89b-12d3-a456-426655440000
+        line_type: Reconcile
+        status: Open
+        part_number: 12345
+        part_name: Widget
+        vendor_part_number: 54321
+        vendor_part_name: Vendor Widget
+        order: PO-123
+        quantity_billed: 10
+        billed_unit_cost: 50
+        billed_total_cost: 500
+        vendor: Acme Corp.
+        reconcile_number: 1001
+
+
+/returns:
+  get:
+    summary: Get a list of returns
+    description: Returns a paginated list of returns
+    parameters:
+      - name: limit
+        in: query
+        description: The maximum number of returns to return (default: 50)
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+        example: 50
+      - name: offset
+        in: query
+        description: The number of returns to skip (default: 0)
+        schema:
+          type: integer
+          minimum: 0
+        example: 0
+    responses:
+      '200':
+        description: OK
+      '400':
+        description: Bad request
+      '401':
+        description: Unauthorized
+      '403':
+        description: Forbidden
+      '404':
+        description: Not found
+      '500':
+        description: Internal server error
+
+
+
+    responses:
+      '200':
+        description: Returns a paginated list of returns
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: The unique identifier of the return
+                      status:
+                        type: string
+                        nullable: true
+                        description: The status of the return
+                      order_id:
+                        type: string
+                        nullable: true
+                        description: The unique identifier of the order associated with the return
+                      rma:
+                        type: string
+                        nullable: true
+                        description: The return merchandise authorization number
+                      tracking_number:
+                        type: string
+                        nullable: true
+                        description: The tracking number of the returned item
+                      description:
+                        type: string
+                        nullable: true
+                        description: A description of the return
+                      customerEmail:
+                        type: string
+                        nullable: true
+                        description: The email address of the customer who initiated the return
+                      zendesk_number:
+                        type: string
+                        nullable: true
+                        description: The unique identifier of the Zendesk ticket associated with the return
+                      action_needed:
+                        type: string
+                        nullable: true
+                        description: Any action required to process the return
+                      issue:
+                        type: string
+                        nullable: true
+                        description: The reason for the return
+                      order_date:
+                        type: string
+                        format: date
+                        nullable: true
+                        description: The date the order was placed
+                      shipped_date:
+                        type: string
+                        format: date
+                        nullable: true
+                        description: The date the order was shipped
+                      requested_date:
+                        type: string
+                        format: date
+                        nullable: true
+                        description: The date the return was requested
+                      enteredBy:
+                        type: string
+                        nullable: true
+                        description: The name of the employee who entered the return into the system
+                      serial_number:
+                        type: string
+                        nullable: true
+                        description: The serial number of the returned item
+                      condition:
+                        type: string
+                        nullable: true
+                        description: The condition of the returned item
+                      customer_id:
+                        type: string
+                        format: uuid
+                        nullable: true
+                        description: The unique identifier of the customer who initiated the return
+                      amount:
+                        type: string
+                        nullable: true
+                        description: The total amount refunded for the return
+                      reported_condition:
+                        type: string
+                        nullable: true
+                        description: The condition of the item reported by the customer
+                      tax_refunded:
+                        type: string
+                        nullable: true
+                        description: The amount of tax refunded for the return
+                      total_refunded:
+                        type: string
+                        nullable: true
+                        description: The total amount refunded for the return, including tax
+                      created_date:
+                        type: string
+                        format: date
+                        nullable: true
+                        description: The date
+
+paths:
+  /return-line-items:
+    get:
+      summary: Get all return line items
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Create a new return line item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnLineItem'
+      responses:
+        '201':
+          description: Created
+  /return-line-items/{id}:
+    get:
+      summary: Get a return line item by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The unique identifier for the return line item.
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not found
+    put:
+      summary: Update a return line item by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The unique identifier for the return line item.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReturnLineItem'
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not found
+    delete:
+      summary: Delete a return line item by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          description: The unique identifier for the return line item.
+      responses:
+        '204':
+          description: No content
+                        components:
+  schemas:
+    ReturnLineItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the return line item.
+        sku:
+          type: string
+          nullable: true
+          description: The SKU of the product being returned.
+        name:
+          type: string
+          nullable: true
+          description: The name of the product being returned.
+        price:
+          type: integer
+          nullable: true
+          description: The price of the product being returned.
+        condition:
+          type: string
+          nullable: true
+          description: The condition of the returned product.
+        tax_refunded:
+          type: integer
+          nullable: true
+          description: The amount of tax refunded for the returned product.
+        flat_rate_shipping:
+          type: integer
+          nullable: true
+          description: The amount of flat rate shipping refunded for the returned product.
+        return_id:
+          type: string
+          nullable: true
+          description: The unique identifier for the return that this line item belongs to.
+        serial_number:
+          type: string
+          nullable: true
+          description: The serial number of the returned product.
+        amount:
+          type: integer
+          nullable: true
+          description: The total amount refunded for the returned product.
+      required:
+        - id
+
+
+
+components:
+  schemas:
+    Warranty:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        warrantyNumber:
+          type: string
+        warrantyName:
+          type: string
+        warrantyType:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+        expirationDate:
+          type: string
+          format: date-time
+        order_id:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        issue:
+          type: string
+        tracking_number:
+          type: string
+        action_needed:
+          type: string
+        customerEmail:
+          type: string
+        rma:
+          type: string
+        zendesk_number:
+          type: string
+        enteredBy:
+          type: string
+        order_date:
+          type: string
+          format: date-time
+        shipped_date:
+          type: string
+          format: date-time
+        requested_date:
+          type: string
+          format: date-time
+        condition:
+          type: string
+        reported_condition:
+          type: string
+        amount:
+          type: string
+        tax_refunded:
+          type: string
+        total_refunded:
+          type: string
+        created_date:
+          type: string
+          format: date-time
+        serial_number:
+          type: string
+        reason_category:
+          type: string
+      required:
+        - id
+        - warrantyNumber
+        - warrantyName
+        - warrantyType
+        - createdDate
+        - expirationDate
+
+paths:
+  /warranties:
+    get:
+      summary: Get a list of all warranties
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Warranty'
+    post:
+      summary: Create a new warranty
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Warranty'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Warranty'
+        '400':
+          description: Bad Request
+
+  /warranties/{warrantyId}:
+    parameters:
+      - in: path
+        name: warrantyId
+        required: true
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Get a specific warranty
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Warranty'
+        '404':
+          description: Not Found
+    patch:
+      summary: Update a specific warranty
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Warranty'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Warranty'
+        '404':
+          description: Not Found
+    delete:
+      summary: Delete a specific warranty
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+
+paths:
+  /suppliers:
+    get:
+      summary: Get all suppliers
+      responses:
+        '200':
+          description: A list of all suppliers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Supplier'
+    post:
+      summary: Create a new supplier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+      responses:
+        '200':
+          description: The created supplier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+
+  /suppliers/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: The ID of the supplier to retrieve or update
+        schema:
+          type: string
+    get:
+      summary: Get a supplier by ID
+      responses:
+        '200':
+          description: The requested supplier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+    put:
+      summary: Update a supplier by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+      responses:
+        '200':
+          description: The updated supplier
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+    delete:
+      summary: Delete a supplier by ID
+      responses:
+        '204':
+          description: Supplier deleted successfully
+          
+          Suppliers:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The unique identifier for the supplier.
+    supplierName:
+      type: string
+      description: The name of the supplier.
+    supplierType:
+      type: string
+      nullable: true
+      description: The type of supplier.
+    industry:
+      type: string
+      nullable: true
+      description: The industry the supplier belongs to.
+    rating:
+      type: string
+      nullable: true
+      description: The rating of the supplier.
+    phone:
+      type: string
+      nullable: true
+      description: The phone number of the supplier.
+    contact_id:
+      type: string
+      nullable: true
+      description: The ID of the contact person for the supplier.
+    created_at:
+      type: string
+      format: date-time
+      nullable: true
+      default: now()
+      description: The date and time when the supplier was created.
+    is_public:
+      type: boolean
+      nullable: true
+      description: Whether the supplier is public or private.
+    controller:
+      type: string
+      nullable: true
+      description: The controller of the supplier.
+    processor:
+      type: string
+      nullable: true
+      description: The processor of the supplier.
+    is_active:
+      type: boolean
+      nullable: true
+      description: Whether the supplier is active or not.
+    user_id:
+      type: string
+      nullable: true
+      description: The ID of the user who created the supplier.
+    order_id:
+      type: string
+      nullable: true
+      description: The ID of the order associated with the supplier.
+    supplierNotes:
+      type: string
+      nullable: true
+      description: Any notes or comments associated with the supplier.
+    annualRevenue:
+      type: integer
+      nullable: true
+      description: The annual revenue of the supplier.
+    billingCity:
+      type: string
+      nullable: true
+      description: The city for the supplier's billing address.
+    billingCountry:
+      type: string
+      nullable: true
+      description: The country for the supplier's billing address.
+    billingLatitude:
+      type: string
+      nullable: true
+      description: The latitude for the supplier's billing address.
+    billingLongitude:
+      type: string
+      nullable: true
+      description: The longitude for the supplier's billing address.
+    billingState:
+      type: string
+      nullable: true
+      description: The state or province for the supplier's billing address.
+    billingStreet:
+      type: string
+      nullable: true
+      description: The street address for the supplier's billing address.
+    numberOfEmployees:
+      type: number
+      nullable: true
+      description: The number of employees for the supplier.
+    ownership:
+      type: string
+      nullable: true
+      description: The ownership status of the supplier.
+    shippingCity:
+      type: string
+      nullable: true
+      description: The city for the supplier's shipping address.
+    shippingCountry:
+      type: string
+      nullable: true
+      description: The country for the supplier's shipping address.
+    shippingLatitude:
+      type: string
+      nullable: true
+      description: The latitude for the supplier's shipping address.
+    shippingLongitude:
+      type: string
+      nullable: true
+      description: The longitude for the supplier's shipping address.
+    shippingState:
+      type: string
+      nullable: true
+      description: The state or province for the supplier's shipping address.
+    shippingStreet:
+      type: string
+      nullable:
+
+paths:
+  /vendors:
+    get:
+      summary: Retrieve a list of vendors
+      operationId: getVendors
+      responses:
+        '200':
+          description: A list of vendors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vendors'
+    post:
+      summary: Create a new vendor
+      operationId: createVendor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vendors'
+      responses:
+        '201':
+          description: The newly created vendor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendors'
+    put:
+      summary: Update an existing vendor
+      operationId: updateVendor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vendors'
+      responses:
+        '200':
+          description: The updated vendor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendors'
+    delete:
+      summary: Delete a vendor
+      operationId: deleteVendor
+      parameters:
+        - name: vendorId
+          in: query
+          description: The ID of the vendor to delete
+          schema:
+            type: string
+          required: true
+      responses:
+        '204':
+          description: Vendor successfully deleted
+          
+  /vendors/{vendorId}:
+    get:
+      summary: Retrieve a specific vendor by ID
+      operationId: getVendorById
+      parameters:
+        - name: vendorId
+          in: path
+          description: The ID of the vendor to retrieve
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: The requested vendor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendors'
+        '404':
+          description: Vendor not found
+    put:
+      summary: Update a specific vendor by ID
+      operationId: updateVendorById
+      parameters:
+        - name: vendorId
+          in: path
+          description: The ID of the vendor to update
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vendors'
+      responses:
+        '200':
+          description: The updated vendor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vendors'
+        '404':
+          description: Vendor not found
+    delete:
+      summary: Delete a specific vendor by ID
+      operationId: deleteVendorById
+      parameters:
+        - name: vendorId
+          in: path
+          description: The ID of the vendor to delete
+          schema:
+            type: string
+          required: true
+      responses:
+        '204':
+          description: Vendor successfully deleted
+        '404':
+          description: Vendor not found
+
+Vendors:
+  type: object
+  properties:
+    id:
+      type: string
+      description: The unique identifier for the supplier.
+    supplierName:
+      type: string
+      description: The name of the supplier.
+    supplierType:
+      type: string
+      nullable: true
+      description: The type of supplier.
+    industry:
+      type: string
+      nullable: true
+      description: The industry the supplier belongs to.
+    rating:
+      type: string
+      nullable: true
+      description: The rating of the supplier.
+    phone:
+      type: string
+      nullable: true
+      description: The phone number of the supplier.
+    contact_id:
+      type: string
+      nullable: true
+      description: The ID of the contact person for the supplier.
+    created_at:
+      type: string
+      format: date-time
+      nullable: true
+      default: now()
+      description: The date and time when the supplier was created.
+    is_public:
+      type: boolean
+      nullable: true
+      description: Whether the supplier is public or private.
+    controller:
+      type: string
+      nullable: true
+      description: The controller of the supplier.
+    processor:
+      type: string
+      nullable: true
+      description: The processor of the supplier.
+    is_active:
+      type: boolean
+      nullable: true
+      description: Whether the supplier is active or not.
+    user_id:
+      type: string
+      nullable: true
+      description: The ID of the user who created the supplier.
+    order_id:
+      type: string
+      nullable: true
+      description: The ID of the order associated with the supplier.
+    supplierNotes:
+      type: string
+      nullable: true
+      description: Any notes or comments associated with the supplier.
+    annualRevenue:
+      type: integer
+      nullable: true
+      description: The annual revenue of the supplier.
+    billingCity:
+      type: string
+      nullable: true
+      description: The city for the supplier's billing address.
+    billingCountry:
+      type: string
+      nullable: true
+      description: The country for the supplier's billing address.
+    billingLatitude:
+      type: string
+      nullable: true
+      description: The latitude for the supplier's billing address.
+    billingLongitude:
+      type: string
+      nullable: true
+      description: The longitude for the supplier's billing address.
+    billingState:
+      type: string
+      nullable: true
+      description: The state or province for the supplier's billing address.
+    billingStreet:
+      type: string
+      nullable: true
+      description: The street address for the supplier's billing address.
+    numberOfEmployees:
+      type: number
+      nullable: true
+      description: The number of employees for the supplier.
+    ownership:
+      type: string
+      nullable: true
+      description: The ownership status of the supplier.
+    shippingCity:
+      type: string
+      nullable: true
+      description: The city for the supplier's shipping address.
+    shippingCountry:
+      type: string
+      nullable: true
+      description: The country for the supplier's shipping address.
+    shippingLatitude:
+      type: string
+      nullable: true
+      description: The latitude for the supplier's shipping address.
+    shippingLongitude:
+      type: string
+      nullable: true
+      description: The longitude for the supplier's shipping address.
+    shippingState:
+      type: string
+      nullable: true
+      description: The state or province for the supplier's shipping address.
+    shippingStreet:
+      type: string
+      nullable:
+paths:
+  /tasks:
+    get:
+      summary: Get all tasks
+      description: Returns a list of all tasks.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+    post:
+      summary: Create a task
+      description: Creates a new task.
+      requestBody:
+        description: The task to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+  /tasks/{taskId}:
+    get:
+      summary: Get a task by ID
+      description: Returns a single task based on the ID provided.
+      parameters:
+        - in: path
+          name: taskId
+          description: The ID of the task to retrieve.
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Not Found
+    put:
+      summary: Update a task
+      description: Updates an existing task based on the ID provided.
+      parameters:
+        - in: path
+          name: taskId
+          description: The ID of the task to update.
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        description: The task to update.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '404':
+          description: Not Found
+    delete:
+      summary: Delete a task
+      description: Deletes an existing task based on the ID provided.
+      parameters:
+        - in: path
+          name: taskId
+          description: The ID of the task to delete.
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Not Found
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        account_id:
+          type: string
+        taskName:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        createdDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        email:
+          type: string
+        phone:
+          type: string
+        priority:
+          type: string
+        subject:
+          type: string
+        callType:
+          type: string
+        vendor_id:
+          type: string
+        supplier_id:
+          type: string
+      required:
+        - id
+        - taskName
+        - status
+        - createdDate
+        - dueDate
+      example:
+        id: 123
+        account_id: "ACCT-123"
+        taskName: "Follow up on payment"
+        description: "Call customer to ask about overdue payment"
+        status: "Open"
+        createdDate: "2022-03-01"
+        dueDate: "2022-03-10"
+        email: "john.doe@example.com"
+        phone: "+1 (555) 123-4567"
+        priority: "High"
+        subject: "Invoice #INV-123"
+        callType: "Outbound"
+        vendor_id: "VENDOR-123"
+        supplier_id: "SUPPLIER-123"
+paths:
+  /work_orders:
+    get:
+      summary: Retrieves a list of all work orders.
+      responses:
+        '200':
+          description: A list of work orders.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkOrder'
+    post:
+      summary: Creates a new work order.
+      requestBody:
+        description: The work order to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+      responses:
+        '201':
+          description: The newly created work order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+  /work_orders/{id}:
+    get:
+      summary: Retrieves a specific work order by ID.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: The ID of the work order to retrieve.
+      responses:
+        '200':
+          description: The requested work order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+        '404':
+          description: The work order was not found.
+    put:
+      summary: Updates a specific work order by ID.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: The ID of the work order to update.
+      requestBody:
+        description: The updated work order.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+      responses:
+        '200':
+          description: The updated work order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+        '404':
+          description: The work order was not found.
+    delete:
+      summary: Deletes a specific work order by ID.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          required: true
+          description: The ID of the work order to delete.
+      responses:
+        '204':
+          description: The work order was deleted.
+        '404':
+          description: The work order was not found.
+
+        WorkOrders:
+  type: object
+  properties:
+    id:
+      type: string
+      format: uuid
+      description: The unique identifier for the work order.
+    number:
+      type: integer
+      nullable: true
+      description: The work order number.
+    site:
+      type: string
+      nullable: true
+      description: The site where the work order is located.
+    work_order_type:
+      type: string
+      nullable: true
+      description: The type of work order.
+    location:
+      type: string
+      nullable: true
+      description: The location where the work order is taking place.
+    part:
+      type: string
+      nullable: true
+      description: The part being worked on in the work order.
+    order_number:
+      type: string
+      nullable: true
+      description: The order number associated with the work order.
+    manufacture_order:
+      type: string
+      nullable: true
+      description: The manufacture order associated with the work order.
+    status:
+      type: string
+      nullable: true
+      description: The current status of the work order.
+    created_by:
+      type: string
+      nullable: true
+      description: The user who created the work order.
+    created_at:
+      type: string
+      format: date-time
+      nullable: true
+      description: The date and time the work order was created.
+    updated_at:
+      type: string
+      format: date-time
+      nullable: true
+      description: The date and time the work order was last updated.
+    issue_date:
+      type: string
+      format: date
+      nullable: true
+      description: The date the work order was issued.
+    expected_completion_date:
+      type: string
+      format: date
+      nullable: true
+      description: The expected completion date for the work order.
+    priority:
+      type: string
+      nullable: true
+      description: The priority level of the work order.
+    memo:
+      type: string
+      nullable: true
+      description: Any additional notes or comments about the work order.
+    bill_of_materials_number:
+      type: integer
+      nullable: true
+      description: The bill of materials number associated with the work order.
+  required:
+    - id
+
+components:
+  schemas:
+    WorkOrderLineItems:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier for the work order line item.
+        part_number:
+          type: string
+          nullable: true
+          description: The part number for the line item.
+        part_name:
+          type: string
+          nullable: true
+          description: The name of the part for the line item.
+        line_type:
+          type: string
+          nullable: true
+          description: The type of line item.
+        line_status:
+          type: string
+          nullable: true
+          description: The status of the line item.
+        unit_quantity:
+          type: integer
+          nullable: true
+          description: The quantity per unit of the line item.
+        total_quantity:
+          type: integer
+          nullable: true
+          description: The total quantity of the line item.
+        work_order_number:
+          type: integer
+          nullable: true
+          description: The work order number associated with the line item.
+      required:
+        - id
+
+        paths:
+  /workorderlineitems/{id}:
+    get:
+      summary: Get a work order line item by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: The unique identifier for the work order line item
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderLineItems'
+        '404':
+          description: Not found
+    put:
+      summary: Update a work order line item by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrderLineItems'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: The unique identifier for the work order line item
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderLineItems'
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+    delete:
+      summary: Delete a work order line item by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+            format: uuid
+          description: The unique identifier for the work order line item
+          required: true
+      responses:
+        '204':
+          description: No content
+        '404':
+          description: Not found
+  /workorderlineitems:
+    get:
+      summary: Get all work order line items
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkOrderLineItems'
+    post:
+      summary: Create a new work order line item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrderLineItems'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrderLineItems'
+        '400':
+          description: Bad request
+
+
+
+/users:
+    get:
+      summary: Get a list of users
+      responses:
+        200:
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    post:
+      summary: Create a new user
+      requestBody:
+        description: User object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        201:
+          description: Created user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users/{id}:
+    get:
+      summary: Get a user by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user to retrieve
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: User object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User not found
+    put:
+      summary: Update a user by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: User object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: Updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User not found
+    delete:
+      summary: Delete a user by ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        204:
+          description: User deleted successfully

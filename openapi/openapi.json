@@ -1,0 +1,4439 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Stateset",
+    "termsOfService": "https://stateset.com/terms/",
+    "contact": {
+      "email": "developers@stateset.com",
+      "url": "http://stateset.com/support"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "x-logo": {
+      "url": "https://stateset.io/stateset_logo_8.png"
+    },
+    "description": "This is the Stateset One API based on The OpenAPI Specification.\n# Introduction\nThis API definition is intended to to be a good starting point for describing your API in [OpenAPI/Swagger format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).\n# OpenAPI Specification\nThe goal of The OpenAPI Specification is to define a standard, language-agnostic interface to REST APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection. When properly defined via OpenAPI, a consumer can  understand and interact with the remote service with a minimal amount of implementation logic. Similar to what interfaces have done for lower-level programming, OpenAPI removes the guesswork in calling the service.\n"
+  },
+  "servers": [
+    {
+      "url": "https://api.stateset.com/v1",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Accounts",
+      "description": "Operations related to accounts."
+    },
+    {
+      "name": "Bill Of Materials",
+      "description": "Operations related to bill of materials."
+    },
+    {
+      "name": "Bill Of Materials Line Items",
+      "description": "Operations related to bill of materials line items."
+    },
+    {
+      "name": "Case",
+      "description": "Operations related to cases."
+    },
+    {
+      "name": "Contacts",
+      "description": "Operations related to contacts."
+    },
+    {
+      "name": "Customers",
+      "description": "Operations related to customers."
+    },
+    {
+      "name": "CycleCount",
+      "description": "Operations related to cycle counts."
+    },
+    {
+      "name": "Inventory Items",
+      "description": "Operations related to inventory items."
+    },
+    {
+      "name": "Leads",
+      "description": "Operations related to leads."
+    },
+    {
+      "name": "Manufacture Orders",
+      "description": "Operations related to manufacturing orders."
+    },
+    {
+      "name": "Manufacture Order Line Items",
+      "description": "Operations related to manufacturing order line items."
+    },
+    {
+      "name": "Messages",
+      "description": "Operations related to messages."
+    },
+    {
+      "name": "Notes",
+      "description": "Operations related to notes."
+    },
+    {
+      "name": "PackingList",
+      "description": "Operations related to packing lists."
+    },
+    {
+      "name": "PackingListItem",
+      "description": "Operations related to packing list items."
+    },
+    {
+      "name": "Pick",
+      "description": "Operations related to picks."
+    },
+    {
+      "name": "PickLineItem",
+      "description": "Operations related to pick line items."
+    },
+    {
+      "name": "Returns",
+      "description": "Operations related to returns."
+    },
+    {
+      "name": "Return Line Items",
+      "description": "Operations related to return items."
+    },
+    {
+      "name": "Suppliers",
+      "description": "Operations related to suppliers."
+    },
+    {
+      "name": "User",
+      "description": "Operations related to users."
+    },
+    {
+      "name": "Vendors",
+      "description": "Operations related to vendors."
+    },
+    {
+      "name": "Warranties",
+      "description": "Operations related to warranties."
+    },
+    {
+      "name": "Warranty Line Items",
+      "description": "Operations related to warranty items."
+    },
+    {
+      "name": "Work Orders",
+      "description": "Operations related to work orders."
+    },
+    {
+      "name": "Work Order Line Items",
+      "description": "Operations related to work order line items."
+    }
+  ],
+  "paths": {
+    "/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Get account by account name",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getAccountByName",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to return accounts",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:accounts"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Accounts"
+                },
+                "example": {
+                  "name": "riggsandporter.com",
+                  "email": "user@example.com"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Account not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/accounts/{id}": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Get account by account name",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getAccountByName",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to return accounts",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:accounts"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Accounts"
+                },
+                "example": {
+                  "name": "riggsandporter.com",
+                  "email": "user@example.com"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Account not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/billofmaterials": {
+      "get": {
+        "tags": [
+          "Bill Of Materials"
+        ],
+        "summary": "Get bill of materials",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getBillofMaterials",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to bill of materials",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to bill of materials accounts",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:bill of materials"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillOfMaterials"
+                },
+                "example": {
+                  "id": 321313221231
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Bill of Materials not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Bill Of Materials"
+        ],
+        "summary": "Create a new bill of materials",
+        "description": "Create a new bill of materials.\nThis can only be done by the logged in bill of materials.\n",
+        "operationId": "createBillofMaterials",
+        "security": [
+          {
+            "main_auth": [
+              "write:billofmaterials"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BillOfMaterials"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/BillOfMaterials"
+              }
+            }
+          },
+          "description": "Created bill of materials object",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Bill of Materials created"
+          },
+          "400": {
+            "description": "Invalid bill of materials supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "405": {
+            "description": "Validation exception",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/billofmaterials/{id}": {
+      "get": {
+        "tags": [
+          "Bill Of Materials"
+        ],
+        "summary": "Get bill of materials by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getBillOfMaterialsById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:billofmaterials"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillOfMaterials"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Bill of Materials not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Bill Of Materials"
+        ],
+        "summary": "Updated bill of materials",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateBillOfMaterials",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:billofmaterials"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BillOfMaterials"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/BillOfMaterials"
+              }
+            }
+          },
+          "description": "Updated bill of materials object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid return supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Bill of Materials not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Bill Of Materials"
+        ],
+        "summary": "Delete Bill of Materials",
+        "description": "This can only be done by the logged in return.",
+        "operationId": "deleteBillOfMaterials",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the bill of materials that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:billofmaterials"
+            ]
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid return supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Bill Of Materials not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/customers": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Get customer by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getCustomers",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset to return customers",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to return customers",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:customers"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customers"
+                },
+                "example": {
+                  "name": "riggsandporter.com",
+                  "email": "user@example.com"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Manufacture Order not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Get customers by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getCustomersById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:customers"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customers"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Note not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Update customers",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateCustomers",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:customers"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customers"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Customers"
+              }
+            }
+          },
+          "description": "Updated customers object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid customers supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Notes not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Customers"
+        ],
+        "summary": "Delete customers",
+        "description": "This can only be done by the logged in return.",
+        "operationId": "deleteCustomers",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the customers that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:customers"
+            ]
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid customers supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Notes not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/billofmaterialsitems": {
+      "get": {
+        "tags": [
+          "Bill Of Materials Line Items"
+        ],
+        "summary": "Get bill of materials item by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getBillOfMaterialsItemById",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to manufacture",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction of billOfMaterialsItem",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:billofmaterialsitems"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BillOfMaterialsLineItem"
+                },
+                "example": {
+                  "id": 321313221231
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Bill Of Materials Line Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/billofmaterialsitems/{id}": {
+      "get": {
+        "tags": [
+          "Bill Of Materials Line Items"
+        ],
+        "summary": "Get bill of materials line item by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getBillOfMaterialsLineItemById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:billofmaterialslineitems"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufactureOrderLineItem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Manufacture Line Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Bill Of Materials Line Items"
+        ],
+        "summary": "Updated billofmaterials line item",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateBillOfMaterialsLineItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:billofmaterialslineitems"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManufactureOrderLineItem"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/ManufactureOrderLineItem"
+              }
+            }
+          },
+          "description": "Updated reuturn object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid billofmaterials line item supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Manufacture Line Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/inventoryitems": {
+      "get": {
+        "tags": [
+          "Inventory Items"
+        ],
+        "summary": "Get inventory items",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getInventoryItems",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to return accounts",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:inventory items"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventoryItems"
+                },
+                "example": {
+                  "id": 321313221231
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Inventory Items not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Inventory Items"
+        ],
+        "summary": "Create a new inventory items",
+        "description": "Create a new inventory items.\nThis can only be done by the logged in.\n",
+        "operationId": "createInventoryItems",
+        "security": [
+          {
+            "main_auth": [
+              "write:inventory itemss"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryItems"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryItems"
+              }
+            }
+          },
+          "description": "Created inventory items object",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Inventory Items created"
+          },
+          "400": {
+            "description": "Invalid message supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "405": {
+            "description": "Validation exception",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/inventoryitems/{id}": {
+      "get": {
+        "tags": [
+          "Inventory Items"
+        ],
+        "summary": "Get inventory items by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getInventoryItemById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:inventoryitems"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InventoryItems"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Note not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Inventory Items"
+        ],
+        "summary": "Updated inventory items",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateInventoryItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:inventoryitems"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryItems"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Notes"
+              }
+            }
+          },
+          "description": "Updated inventory items object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid inventory items supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Notes not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Delete Inventory Items",
+        "description": "This can only be done by the logged in return.",
+        "operationId": "deleteInventoryItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the inventory items that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:inventoryitems"
+            ]
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid inventory items supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Notes not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/manufactureorders": {
+      "get": {
+        "tags": [
+          "Manufacture Orders"
+        ],
+        "summary": "Get account by manufacture order id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getManufactureOrders",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset to return manufacture orders",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to return manufacture orders",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:manufactureorders"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufactureOrder"
+                },
+                "example": {
+                  "name": "riggsandporter.com",
+                  "email": "user@example.com"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Manufacture Order not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/manufactureorders/{id}": {
+      "get": {
+        "tags": [
+          "Manufacture Orders"
+        ],
+        "summary": "Get manufacture order by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getManufactureOrderById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:manufactureorders"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufactureOrder"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Manufacture Order not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Manufacture Orders"
+        ],
+        "summary": "Updated manufacture order",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateManufactureOrder",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:manufactureorders"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManufactureOrder"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/ManufactureOrder"
+              }
+            }
+          },
+          "description": "Updated manufacture order object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid manufacture order supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Manufacture Order not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/manufactureorderitems": {
+      "get": {
+        "tags": [
+          "Manufacture Order Line Items"
+        ],
+        "summary": "Get manufactureItem by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getManufactureItemById",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to manufacture",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to manufacture accounts",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:manufactureItems"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufactureOrderLineItem"
+                },
+                "example": {
+                  "id": 321313221231
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "ManufactureItem not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/manufactureorderitems/{id}": {
+      "get": {
+        "tags": [
+          "Manufacture Order Line Items"
+        ],
+        "summary": "Get manufacture line item by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getManufactureLineItemById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:manufacturelineitems"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufactureOrderLineItem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Manufacture Line Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Manufacture Order Line Items"
+        ],
+        "summary": "Updated manufacture line item",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateManufactureLineItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:manufacturelineitems"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManufactureOrderLineItem"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/ManufactureOrderLineItem"
+              }
+            }
+          },
+          "description": "Updated reuturn object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid manufacture line item supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Manufacture Line Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/messages": {
+      "get": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Get messages",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getMessages",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to return accounts",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:messages"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Messages"
+                },
+                "example": {
+                  "id": 321313221231
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Message not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Create a new message",
+        "description": "Create a new message.\nThis can only be done by the logged in.\n",
+        "operationId": "createMessage",
+        "security": [
+          {
+            "main_auth": [
+              "write:messages"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Messages"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Messages"
+              }
+            }
+          },
+          "description": "Created message object",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Message created"
+          },
+          "400": {
+            "description": "Invalid message supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "405": {
+            "description": "Validation exception",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/messages/{id}": {
+      "get": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Get message by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getMessageById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:messages"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Messages"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "User not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Updated message",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateMessage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:messages"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Messages"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Messages"
+              }
+            }
+          },
+          "description": "Updated message object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid message supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Message not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Messages"
+        ],
+        "summary": "Delete message",
+        "description": "This can only be done by the logged in return.",
+        "operationId": "deleteMessage",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the message that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:messages"
+            ]
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid message supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Message not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/notes": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Get notes",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getNotes",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to return accounts",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:notes"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Notes"
+                },
+                "example": {
+                  "id": 321313221231
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Note not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Create a new note",
+        "description": "Create a new note.\nThis can only be done by the logged in.\n",
+        "operationId": "createNote",
+        "security": [
+          {
+            "main_auth": [
+              "write:notes"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notes"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Notes"
+              }
+            }
+          },
+          "description": "Created note object",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Note created"
+          },
+          "400": {
+            "description": "Invalid message supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "405": {
+            "description": "Validation exception",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/notes/{id}": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Get notes by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getNotesById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:notes"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Notes"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Note not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Updated notes",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateNotes",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:notes"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notes"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Notes"
+              }
+            }
+          },
+          "description": "Updated notes object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid notes supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Notes not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Notes"
+        ],
+        "summary": "Delete notes",
+        "description": "This can only be done by the logged in return.",
+        "operationId": "deleteNotes",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the notes that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:notes"
+            ]
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid notes supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Notes not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/returns": {
+      "get": {
+        "tags": [
+          "Returns"
+        ],
+        "summary": "Get returns",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getReturns",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to return accounts",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:returns"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Return"
+                },
+                "example": {
+                  "id": 321313221231
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Return not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Returns"
+        ],
+        "summary": "Create a new return",
+        "description": "Create a new return.\nThis can only be done by the logged in return.\n",
+        "operationId": "createReturn",
+        "security": [
+          {
+            "main_auth": [
+              "write:returns"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Return"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Return"
+              }
+            }
+          },
+          "description": "Created return object",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Return created"
+          },
+          "400": {
+            "description": "Invalid return supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "405": {
+            "description": "Validation exception",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/returns/{id}": {
+      "get": {
+        "tags": [
+          "Returns"
+        ],
+        "summary": "Get return by id",
+        "description": "Get return by id with all details and items",
+        "operationId": "getReturnById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:returns"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Return"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "User not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Returns"
+        ],
+        "summary": "Updated return",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateReturn",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:returns"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Return"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Return"
+              }
+            }
+          },
+          "description": "Updated reuturn object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid return supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Return not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Returns"
+        ],
+        "summary": "Delete return",
+        "description": "This can only be done by the logged in return.",
+        "operationId": "deleteReturn",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the return that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:returns"
+            ]
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid return supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Return not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/returnitems": {
+      "get": {
+        "tags": [
+          "Return Line Items"
+        ],
+        "summary": "Get returnItem by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getReturnItemById",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to return accounts",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:returnItems"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReturnItem"
+                },
+                "example": {
+                  "id": 321313221231
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "ReturnItem not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/returnitems/{id}": {
+      "get": {
+        "tags": [
+          "Return Line Items"
+        ],
+        "summary": "Get return line item by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getReturnLineItemById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:returnlineitems"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReturnItem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Return Line Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Return Line Items"
+        ],
+        "summary": "Updated return line item",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateReturnLineItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:returnlineitems"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReturnItem"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/ReturnItem"
+              }
+            }
+          },
+          "description": "Updated reuturn object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid return line item supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Return Line Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/warranties": {
+      "get": {
+        "tags": [
+          "Warranties"
+        ],
+        "summary": "Get warranties",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getWarranties",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to return warranties",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:warranties"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Warranty"
+                },
+                "example": {
+                  "id": 321313221231
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Return not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Warranties"
+        ],
+        "summary": "Create a new warranty",
+        "description": "Create a new return.\nThis can only be done by the logged in return.\n",
+        "operationId": "createWarranty",
+        "security": [
+          {
+            "main_auth": [
+              "write:warranties"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Warranty"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Warranty"
+              }
+            }
+          },
+          "description": "Created warranty object",
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Warranty created"
+          },
+          "400": {
+            "description": "Invalid warranty supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "405": {
+            "description": "Validation exception",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/warranties/{id}": {
+      "get": {
+        "tags": [
+          "Warranty"
+        ],
+        "summary": "Get warranty by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getWarrantyById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:warranties"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Warranty"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "User not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Warranty"
+        ],
+        "summary": "Updated warranty",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateWarranty",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:warranties"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Warranty"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Warranty"
+              }
+            }
+          },
+          "description": "Updated reuturn object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid warranty supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Warranty not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Warranty"
+        ],
+        "summary": "Delete warranty",
+        "description": "This can only be done by the logged in warranty.",
+        "operationId": "deleteWarranty",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the warranty that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:warranties"
+            ]
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid warranty supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Warranty not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/warrantyitems": {
+      "get": {
+        "tags": [
+          "Warranty Line Items"
+        ],
+        "summary": "Get warrantyItem by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getWarrantyItemById",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to warranty",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to warranty accounts",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:warrantyItems"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WarrantyItem"
+                },
+                "example": {
+                  "id": 321313221231
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "WarrantyItem not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/warrantyitems/{id}": {
+      "get": {
+        "tags": [
+          "Warranty Line Items"
+        ],
+        "summary": "Get warranty line item by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getWarrantyLineItemById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:warrantylineitems"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WarrantyItem"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Warranty Line Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Warranty Line Items"
+        ],
+        "summary": "Updated warranty line item",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateWarrantyLineItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:warrantylineitems"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WarrantyItem"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/WarrantyItem"
+              }
+            }
+          },
+          "description": "Updated reuturn object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid warranty line item supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Warranty Line Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/workorders": {
+      "get": {
+        "tags": [
+          "Work Orders"
+        ],
+        "summary": "Get account by work order id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getWorkOrdes",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items to return",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset to return work orders",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "Direction to return work orders",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:workorders"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkOrder"
+                },
+                "example": {
+                  "name": "riggsandporter.com",
+                  "email": "user@example.com"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Work Order not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/workorders/{id}": {
+      "get": {
+        "tags": [
+          "Work Orders"
+        ],
+        "summary": "Get work order by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getWorkOrderById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:workorders"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkOrder"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Work Order not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Work Orders"
+        ],
+        "summary": "Updated work order",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateWorkOrder",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:workorders"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkOrder"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkOrder"
+              }
+            }
+          },
+          "description": "Updated work order object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid work order supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Work Order not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/workorderitems": {
+      "get": {
+        "tags": [
+          "Work Order Line Items"
+        ],
+        "summary": "Get work order item by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getWorkItemById",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of items",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Filter users without email",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "order_direction",
+            "in": "query",
+            "description": "diretions to return work order items",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:workItems"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkOrderLineItems"
+                },
+                "example": {
+                  "id": 321313221231
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Work Order Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    },
+    "/workorderitems/{id}": {
+      "get": {
+        "tags": [
+          "Work Order Line Items"
+        ],
+        "summary": "Get work line item by id",
+        "description": "Some description of the operation.\nYou can use `Markdown` here.\n",
+        "operationId": "getWorkLineItemById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "read:worklineitems"
+            ]
+          },
+          {
+            "api_key": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkOrderLineItems"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Work Line Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Work Order Line Items"
+        ],
+        "summary": "Updated work line item",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateWorkLineItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id that needs to be updated",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "main_auth": [
+              "write:worklineitems"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkOrderLineItems"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkOrderLineItems"
+              }
+            }
+          },
+          "description": "Updated reuturn object",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid work line item supplied",
+            "$ref": "#/components/responses/Problem"
+          },
+          "404": {
+            "description": "Work Line Item not found",
+            "$ref": "#/components/responses/Problem"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "main_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://api.stateset.com/v1/oauth/dialog",
+            "scopes": {
+              "read:users": "read users info",
+              "write:users": "modify or remove users"
+            }
+          }
+        }
+      },
+      "api_key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "api_key"
+      },
+      "basic_auth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    },
+    "schemas": {
+      "Accounts": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the account."
+          },
+          "accountName": {
+            "type": "string",
+            "description": "The name of the account.",
+            "example": "Acme Corp"
+          },
+          "accountType": {
+            "type": "string",
+            "description": "The type of account.",
+            "example": "Customer"
+          },
+          "industry": {
+            "type": "string",
+            "description": "The industry the account belongs to.",
+            "example": "Manufacturing"
+          },
+          "rating": {
+            "type": "string",
+            "description": "The rating of the account.",
+            "example": "Hot"
+          },
+          "phone": {
+            "type": "string",
+            "description": "The phone number of the account.",
+            "example": "555-555-5555"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "default": "now()",
+            "description": "The date and time when the account was created."
+          },
+          "is_public": {
+            "type": "boolean",
+            "description": "Whether the account is public or private."
+          },
+          "controller": {
+            "type": "string",
+            "description": "The controller of the account."
+          },
+          "processor": {
+            "type": "string",
+            "description": "The processor of the account."
+          },
+          "is_active": {
+            "type": "boolean",
+            "description": "Whether the account is active or not."
+          },
+          "user_id": {
+            "type": "string",
+            "description": "The ID of the user who created the account."
+          },
+          "order_id": {
+            "type": "string",
+            "description": "The ID of the order associated with the account."
+          },
+          "accountNotes": {
+            "type": "string",
+            "description": "Any notes or comments associated with the account."
+          },
+          "annualRevenue": {
+            "type": "integer",
+            "description": "The annual revenue of the account."
+          },
+          "billingCity": {
+            "type": "string",
+            "description": "The city for the account's billing address."
+          },
+          "billingCountry": {
+            "type": "string",
+            "description": "The country for the account's billing address."
+          },
+          "billingLatitude": {
+            "type": "string",
+            "description": "The latitude for the account's billing address."
+          },
+          "billingLongitude": {
+            "type": "string",
+            "description": "The longitude for the account's billing address."
+          },
+          "billingState": {
+            "type": "string",
+            "description": "The state or province for the account's billing address."
+          },
+          "billingStreet": {
+            "type": "string",
+            "description": "The street address for the account's billing address."
+          },
+          "numberOfEmployees": {
+            "type": "number",
+            "description": "The number of employees for the account."
+          },
+          "ownership": {
+            "type": "string",
+            "description": "The ownership status of the account."
+          },
+          "shippingCity": {
+            "type": "string",
+            "description": "The city for the account's shipping address."
+          },
+          "shippingCountry": {
+            "type": "string",
+            "description": "The country for the account's shipping address."
+          },
+          "shippingLatitude": {
+            "type": "string",
+            "description": "The latitude for the account's shipping address."
+          },
+          "shippingLongitude": {
+            "type": "string",
+            "description": "The longitude for the account's shipping address."
+          },
+          "shippingState": {
+            "type": "string",
+            "description": "The state or province for the account's shipping address."
+          },
+          "shippingStreet": {
+            "type": "string"
+          }
+        }
+      },
+      "Problem": {
+        "type": "object",
+        "additionalProperties": true,
+        "minProperties": 1,
+        "description": "The Problem Details JSON Object [[RFC7807](https://tools.ietf.org/html/rfc7807)].",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "A URI reference [[RFC3986](https://tools.ietf.org/html/rfc3986)] that identifies the problem type. It should provide human-readable documentation for the problem type. When this member is not present, its value is assumed to be \"about:blank\".",
+            "format": "uri"
+          },
+          "title": {
+            "type": "string",
+            "description": "A short, human-readable summary of the problem type. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization."
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code.",
+            "minimum": 400,
+            "maximum": 599
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human-readable explanation specific to this occurrence of the problem."
+          },
+          "instance": {
+            "type": "string",
+            "description": "A URI reference that identifies the specific occurrence of the problem.  It may or may not yield further information if dereferenced."
+          }
+        }
+      },
+      "BillOfMaterials": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier for the bill of materials."
+          },
+          "number": {
+            "type": "integer",
+            "description": "The number of the bill of materials."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the bill of materials."
+          },
+          "valid": {
+            "type": "string",
+            "description": "Whether or not the bill of materials is valid."
+          },
+          "groups": {
+            "type": "string",
+            "description": "The groups associated with the bill of materials."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the bill of materials was created."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the bill of materials was last updated."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the bill of materials."
+          }
+        }
+      },
+      "Customers": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier of the customer."
+          },
+          "sso_id": {
+            "type": "string",
+            "description": "The unique identifier of the customer in the SSO system."
+          },
+          "activationDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the customer was activated."
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the customer."
+          },
+          "firstName": {
+            "type": "string",
+            "description": "The first name of the customer."
+          },
+          "lastName": {
+            "type": "string",
+            "description": "The last name of the customer."
+          },
+          "phone": {
+            "type": "string",
+            "description": "The phone number of the customer."
+          },
+          "stripe_customer_id": {
+            "type": "string",
+            "description": "The unique identifier of the customer in the Stripe system."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the customer was created."
+          }
+        }
+      },
+      "BillOfMaterialsLineItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier of the line item.",
+            "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+          },
+          "part_number": {
+            "type": "string",
+            "description": "The part number of the item.",
+            "example": "12345"
+          },
+          "part_name": {
+            "type": "string",
+            "description": "The name of the item.",
+            "example": "Screw"
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "The quantity of the item required in the bill of materials.",
+            "example": 50
+          },
+          "purchase_supply_type": {
+            "type": "string",
+            "description": "The type of purchase/supply for the item.",
+            "example": "Vendor"
+          },
+          "line_type": {
+            "type": "string",
+            "description": "The type of line item in the bill of materials.",
+            "example": "Raw Material"
+          },
+          "bill_of_materials_number": {
+            "type": "integer",
+            "description": "The bill of materials number that this line item belongs to.",
+            "example": 1
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the line item.",
+            "example": "Pending"
+          }
+        }
+      },
+      "ManufactureOrderLineItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Unique identifier for the Manufacture Order Line Item."
+          },
+          "line_type": {
+            "type": "string",
+            "description": "The type of the manufacture order line item."
+          },
+          "output_type": {
+            "type": "string",
+            "description": "The type of output of the manufacture order line item."
+          },
+          "line_status": {
+            "type": "string",
+            "description": "The status of the manufacture order line item."
+          },
+          "part_number": {
+            "type": "string",
+            "description": "The part number of the manufacture order line item."
+          },
+          "part_name": {
+            "type": "string",
+            "description": "The name of the part of the manufacture order line item."
+          },
+          "expected_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The expected completion date of the manufacture order line item."
+          },
+          "quantity": {
+            "type": "integer",
+            "description": "The quantity of the manufacture order line item."
+          },
+          "work_order_number": {
+            "type": "integer",
+            "description": "The work order number of the manufacture order line item."
+          },
+          "site": {
+            "type": "string",
+            "description": "The site where the manufacture order line item is to be produced."
+          },
+          "yield_location": {
+            "type": "string",
+            "description": "The location where the yield of the manufacture order line item is to be produced."
+          },
+          "bom_number": {
+            "type": "integer",
+            "description": "The Bill of Materials (BOM) number of the manufacture order line item."
+          },
+          "bom_name": {
+            "type": "string",
+            "description": "The Bill of Materials (BOM) name of the manufacture order line item."
+          },
+          "priority": {
+            "type": "string",
+            "description": "The priority of the manufacture order line item."
+          },
+          "manufacture_order_number": {
+            "type": "integer",
+            "description": "The number of the manufacture order for which the manufacture order line item belongs to."
+          }
+        }
+      },
+      "InventoryItems": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the inventory item."
+          },
+          "sku": {
+            "type": "string",
+            "description": "The stock keeping unit of the inventory item."
+          },
+          "description": {
+            "type": "string",
+            "description": "The description of the inventory item."
+          },
+          "size": {
+            "type": "string",
+            "description": "The size of the inventory item."
+          },
+          "incoming": {
+            "type": "integer",
+            "description": "The quantity of incoming inventory item."
+          },
+          "color": {
+            "type": "string",
+            "description": "The color of the inventory item."
+          },
+          "warehouse": {
+            "type": "integer",
+            "description": "The identifier of the warehouse where the inventory item is stored."
+          },
+          "arriving": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the inventory item is expected to arrive."
+          },
+          "purchase_order_id": {
+            "type": "string",
+            "description": "The identifier of the purchase order for the inventory item."
+          },
+          "available": {
+            "type": "integer",
+            "description": "The quantity of available inventory item."
+          },
+          "deliveryDate": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the inventory item is delivered."
+          },
+          "arrivalDate": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the inventory item arrived."
+          },
+          "upc": {
+            "type": "string",
+            "description": "The universal product code of the inventory item."
+          },
+          "restock_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the inventory item is scheduled to be restocked."
+          }
+        }
+      },
+      "Notes": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier for the note."
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the note."
+          },
+          "body": {
+            "type": "string",
+            "description": "The body of the note."
+          },
+          "created_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the note was created."
+          },
+          "last_modified_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the note was last modified."
+          }
+        }
+      },
+      "ManufactureOrder": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "site": {
+            "type": "string"
+          },
+          "yield_location": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string"
+          },
+          "expected_completion_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "created_on": {
+            "type": "string",
+            "format": "date"
+          },
+          "issued_on": {
+            "type": "string",
+            "format": "date"
+          },
+          "memo": {
+            "type": "string"
+          }
+        }
+      },
+      "Messages": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the message"
+          },
+          "body": {
+            "type": "string",
+            "description": "The body of the message"
+          },
+          "to": {
+            "type": "string",
+            "description": "The recipient of the message"
+          },
+          "from": {
+            "type": "string",
+            "description": "The sender of the message"
+          },
+          "sentReceipt": {
+            "type": "boolean",
+            "description": "Indicates whether the message has been sent"
+          },
+          "deliveredReceipt": {
+            "type": "boolean",
+            "description": "Indicates whether the message has been delivered"
+          },
+          "fromMe": {
+            "type": "boolean",
+            "description": "Indicates whether the message is from the user"
+          },
+          "user_id": {
+            "type": "string",
+            "description": "The ID of the user associated with the message"
+          },
+          "username": {
+            "type": "string",
+            "description": "The username of the user associated with the message"
+          },
+          "is_public": {
+            "type": "boolean",
+            "description": "Indicates whether the message is public"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The creation time of the message"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date of the message"
+          },
+          "time": {
+            "type": "string",
+            "format": "time",
+            "description": "The time of the message"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "The timestamp of the message"
+          },
+          "messageNumber": {
+            "type": "integer",
+            "description": "The message number"
+          },
+          "isCode": {
+            "type": "boolean",
+            "description": "Indicates whether the message is a code"
+          },
+          "likes": {
+            "type": "integer",
+            "description": "The number of likes for the message"
+          }
+        }
+      },
+      "Return": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the return."
+          },
+          "order_id": {
+            "type": "string",
+            "description": "The order ID associated with the return."
+          },
+          "rma": {
+            "type": "string",
+            "description": "The return merchandise authorization number."
+          },
+          "tracking_number": {
+            "type": "string",
+            "description": "The tracking number of the returned item."
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the return."
+          },
+          "customer_email": {
+            "type": "string",
+            "description": "The email address of the customer who initiated the return."
+          },
+          "zendesk_number": {
+            "type": "string",
+            "description": "The unique identifier of the Zendesk ticket associated with the return."
+          },
+          "action_needed": {
+            "type": "string",
+            "description": "Any action required to process the return."
+          },
+          "issue": {
+            "type": "string",
+            "description": "The reason for the return."
+          },
+          "order_string": {
+            "type": "string",
+            "description": "The string the order was placed."
+          },
+          "shipped_string": {
+            "type": "string",
+            "description": "The string the order was shipped."
+          },
+          "requested_string": {
+            "type": "string",
+            "description": "The string the return was requested."
+          },
+          "enteredBy": {
+            "type": "string",
+            "description": "The name of the employee who entered the return into the system."
+          },
+          "customer_id": {
+            "type": "string",
+            "description": "The unique identifier of the customer who initiated the return."
+          },
+          "amount": {
+            "type": "string",
+            "description": "The amount of the return."
+          },
+          "reported_condition": {
+            "type": "string",
+            "description": "The condition of the returned item."
+          },
+          "tax_refunded": {
+            "type": "string",
+            "description": "The amount of tax refunded."
+          },
+          "total_refunded": {
+            "type": "string",
+            "description": "The total amount refunded."
+          },
+          "created_string": {
+            "type": "string",
+            "description": "The string the return was created.",
+            "default": "now()"
+          },
+          "reason_category": {
+            "type": "string",
+            "description": "The category of the reason for the return."
+          },
+          "flat_rate_shipping": {
+            "type": "integer",
+            "description": "The flat rate shipping amount."
+          },
+          "refunded_string": {
+            "type": "string",
+            "description": "The string the return was refunded."
+          },
+          "warehouse_received_string": {
+            "type": "string",
+            "description": "The string the return was received at the warehouse."
+          },
+          "warehouse_condition_string": {
+            "type": "string",
+            "description": "The string the condition of the return was verified at the warehouse."
+          },
+          "fedex_status": {
+            "type": "string",
+            "description": "The status of the return in FedEx."
+          },
+          "scanned_serial_number": {
+            "type": "string",
+            "description": "The serial number of the returned item."
+          },
+          "match": {
+            "type": "string",
+            "description": "Whether or not the serial number matches the order."
+          },
+          "country": {
+            "type": "string",
+            "description": "The country of the customer who initiated the return."
+          },
+          "serial_number": {
+            "type": "string",
+            "description": "The serial number of the returned item."
+          },
+          "condition": {
+            "type": "string",
+            "description": "The condition of the returned item."
+          },
+          "order_refunded": {
+            "type": "boolean",
+            "description": "Whether or not the order was refunded.",
+            "default": false
+          },
+          "workflow_id": {
+            "type": "string",
+            "description": "The workflow ID associated with the return."
+          },
+          "sso_id": {
+            "type": "string",
+            "description": "The unique identifier of the SSO user who initiated the return."
+          },
+          "customer_email_normalized": {
+            "type": "string",
+            "description": "The normalized email address of the customer who initiated the return."
+          }
+        }
+      },
+      "ReturnItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the return"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the return"
+          },
+          "order_id": {
+            "type": "string",
+            "description": "The unique identifier of the order associated with the return"
+          },
+          "rma": {
+            "type": "string",
+            "description": "The return merchandise authorization number"
+          },
+          "tracking_number": {
+            "type": "string",
+            "description": "The tracking number of the returned item"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the return"
+          },
+          "customerEmail": {
+            "type": "string",
+            "description": "The email address of the customer who initiated the return"
+          },
+          "zendesk_number": {
+            "type": "string",
+            "description": "The unique identifier of the Zendesk ticket associated with the return"
+          },
+          "action_needed": {
+            "type": "string",
+            "description": "Any action required to process the return"
+          },
+          "issue": {
+            "type": "string",
+            "description": "The reason for the return"
+          },
+          "order_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date the order was placed"
+          },
+          "shipped_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date the order was shipped"
+          },
+          "requested_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date the return was requested"
+          },
+          "enteredBy": {
+            "type": "string",
+            "description": "The name of the employee who entered the return into the system"
+          },
+          "serial_number": {
+            "type": "string",
+            "description": "The serial number of the returned item"
+          },
+          "condition": {
+            "type": "string",
+            "description": "The condition of the returned item"
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier of the customer who initiated the return"
+          },
+          "amount": {
+            "type": "string",
+            "description": "The total amount refunded for the return"
+          },
+          "reported_condition": {
+            "type": "string",
+            "description": "The condition of the item reported by the customer"
+          },
+          "tax_refunded": {
+            "type": "string",
+            "description": "The amount of tax refunded for the return"
+          },
+          "total_refunded": {
+            "type": "string",
+            "description": "The total amount refunded for the return, including tax"
+          },
+          "created_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date"
+          }
+        }
+      },
+      "Warranty": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "string"
+          },
+          "warrantyNumber": {
+            "type": "string"
+          },
+          "warrantyName": {
+            "type": "string"
+          },
+          "warrantyType": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expirationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "order_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "issue": {
+            "type": "string"
+          },
+          "tracking_number": {
+            "type": "string"
+          },
+          "action_needed": {
+            "type": "string"
+          },
+          "customerEmail": {
+            "type": "string"
+          },
+          "rma": {
+            "type": "string"
+          },
+          "zendesk_number": {
+            "type": "string"
+          },
+          "enteredBy": {
+            "type": "string"
+          },
+          "order_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "shipped_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "requested_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "condition": {
+            "type": "string"
+          },
+          "reported_condition": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "tax_refunded": {
+            "type": "string"
+          },
+          "total_refunded": {
+            "type": "string"
+          },
+          "created_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "serial_number": {
+            "type": "string"
+          },
+          "reason_category": {
+            "type": "string"
+          }
+        }
+      },
+      "WarrantyItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the warranty"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the warranty"
+          },
+          "order_id": {
+            "type": "string",
+            "description": "The unique identifier of the order associated with the warranty"
+          },
+          "rma": {
+            "type": "string",
+            "description": "The warranty merchandise authorization number"
+          },
+          "tracking_number": {
+            "type": "string",
+            "description": "The tracking number of the warrantyed item"
+          },
+          "description": {
+            "type": "string",
+            "description": "A description of the warranty"
+          },
+          "customerEmail": {
+            "type": "string",
+            "description": "The email address of the customer who initiated the warranty"
+          },
+          "zendesk_number": {
+            "type": "string",
+            "description": "The unique identifier of the Zendesk ticket associated with the warranty"
+          },
+          "action_needed": {
+            "type": "string",
+            "description": "Any action required to process the warranty"
+          },
+          "issue": {
+            "type": "string",
+            "description": "The reason for the warranty"
+          },
+          "order_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date the order was placed"
+          },
+          "shipped_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date the order was shipped"
+          },
+          "requested_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date the warranty was requested"
+          },
+          "enteredBy": {
+            "type": "string",
+            "description": "The name of the employee who entered the warranty into the system"
+          },
+          "serial_number": {
+            "type": "string",
+            "description": "The serial number of the warranty item"
+          },
+          "condition": {
+            "type": "string",
+            "description": "The condition of the warranty item"
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier of the customer who initiated the warranty"
+          },
+          "amount": {
+            "type": "string",
+            "description": "The total amount refunded for the warranty"
+          },
+          "reported_condition": {
+            "type": "string",
+            "description": "The condition of the item reported by the customer"
+          },
+          "tax_refunded": {
+            "type": "string",
+            "description": "The amount of tax refunded for the warranty"
+          },
+          "total_refunded": {
+            "type": "string",
+            "description": "The total amount refunded for the warranty, including tax"
+          },
+          "created_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date"
+          }
+        }
+      },
+      "WorkOrder": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the work order."
+          },
+          "number": {
+            "type": "integer",
+            "description": "The work order number."
+          },
+          "site": {
+            "type": "string",
+            "description": "The site where the work order is located."
+          },
+          "work_order_type": {
+            "type": "string",
+            "description": "The type of work order."
+          },
+          "location": {
+            "type": "string",
+            "description": "The location where the work order is taking place."
+          },
+          "part": {
+            "type": "string",
+            "description": "The part being worked on in the work order."
+          },
+          "order_number": {
+            "type": "string",
+            "description": "The order number associated with the work order."
+          },
+          "manufacture_order": {
+            "type": "string",
+            "description": "The manufacture order associated with the work order."
+          },
+          "status": {
+            "type": "string",
+            "description": "The current status of the work order."
+          },
+          "created_by": {
+            "type": "string",
+            "description": "The user who created the work order."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the work order was created."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date and time the work order was last updated."
+          },
+          "issue_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date the work order was issued."
+          },
+          "expected_completion_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The expected completion date for the work order."
+          },
+          "priority": {
+            "type": "string",
+            "description": "The priority level of the work order."
+          },
+          "memo": {
+            "type": "string",
+            "description": "Any additional notes or comments about the work order."
+          },
+          "bill_of_materials_number": {
+            "type": "integer",
+            "description": "The bill of materials number associated with the work order."
+          }
+        }
+      },
+      "WorkOrderLineItems": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The unique identifier for the work order line item."
+          },
+          "part_number": {
+            "type": "string",
+            "description": "The part number for the line item."
+          },
+          "part_name": {
+            "type": "string",
+            "description": "The name of the part for the line item."
+          },
+          "line_type": {
+            "type": "string",
+            "description": "The type of line item."
+          },
+          "line_status": {
+            "type": "string",
+            "description": "The status of the line item."
+          },
+          "unit_quantity": {
+            "type": "integer",
+            "description": "The quantity per unit of the line item."
+          },
+          "total_quantity": {
+            "type": "integer",
+            "description": "The total quantity of the line item."
+          },
+          "work_order_number": {
+            "type": "integer",
+            "description": "The work order number associated with the line item."
+          }
+        }
+      }
+    },
+    "responses": {
+      "Problem": {
+        "description": "Problem",
+        "content": {
+          "application/problem+json": {
+            "schema": {
+              "$ref": "#/components/schemas/Problem"
+            }
+          }
+        }
+      }
+    }
+  }
+}

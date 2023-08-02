@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Stateset
   version: 1.0.0
-  description: OpenAPI specification for the Stateset
+  description: OpenAPI specification for the Stateset API
 servers:
   - url: http://api.stateset.com/api/v1
 paths:
@@ -13,7 +13,7 @@ paths:
       responses:
         '200':
           description: A list of accounts
-          content:s
+          content:
             application/json:
               schema:
                 type: array
@@ -24,6 +24,7 @@ paths:
       operationId: createAccount
       requestBody:
         description: Account object that needs to be added to the CRM database
+        required: true
         content:
           application/json:
             schema:
@@ -67,6 +68,7 @@ paths:
             type: string
       requestBody:
         description: Account object that needs to be updated in the CRM database
+        required: true
         content:
           application/json:
             schema:
@@ -80,6 +82,39 @@ paths:
                 $ref: '#/components/schemas/Account'
         '404':
           description: Account not found
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+      example:
+        id: 123456789
+        name: John Doe
+        email: john.doe@example.com
+        phone: +1-555-555-5555
+    AccountInput:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+      example:
+        name: John Doe
+        email: john.doe@example.com
+        phone: +1-555-555-5555
+
+
   /agreements:
     get:
       summary: Retrieve all agreements
